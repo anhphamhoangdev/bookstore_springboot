@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Author</th>
+        <th scope="col">Category</th>
+        <th scope="col">Publisher</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <th scope="row" th:text="${book.getBookID()}">1</th>
+        <td><img th:src="@{'/display?id=' + ${book.getBookID()}}" alt="photo"></td>
+        <td th:text="${book.getBookName()}">Name</td>
+        <td th:text="${book.getSellPrice()}">Price</td>
+        <td>
+            <span th:each="author, iterStat : ${book.getAuthors()}">
+                <span th:text="${author.getAuthorName()}"></span>
+                <span th:if="${!iterStat.last}">, </span>
+            </span>
+        </td>
+        <td th:text="${book.getCategory().getCategoryName()}">Category</td>
+        <td th:text="${book.getPublisher().getPublisherName()}">Publisher</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Upload Form</title>
+</head>
+<body>
+<h1>Add a New Book</h1>
+
+<form th:action="@{/save-book}" method="post" enctype="multipart/form-data">
+  <label for="bookName">Book Name:</label><br>
+  <input type="text" id="bookName" name="bookName" required><br><br>
+
+  <label for="importPrice">Import Price:</label><br>
+  <input type="number" min="0,1" id="importPrice" name="importPrice" step="0.01" required><br><br>
+
+  <label for="description">Description</label><br>
+  <input type="text" id="description" name="description" required><br><br>
+
+  <label for="language">Language</label><br>
+  <select name="language" class="form-control" id="language">
+    <option th:each="language : ${languages}" th:value="${language}" th:text="${language}"></option>
+  </select>
+  <br><br>
+
+
+  <label for="publishYear">Publish Year</label><br>
+  <input type="date" name="publishYear" id="publishYear"><br><br>
+
+
+  <label for="publisher">Publisher</label><br>
+  <select name="publisher" class="form-control" id="publisher">
+    <option th:each="publisher : ${publishers}" th:value="${publisher.getPublisherID()}" th:text="${publisher.getPublisherName()}"></option>
+  </select>
+  <br><br>
+
+  <label for="category">Category</label><br>
+  <select name="category" class="form-control" id="category">
+    <option th:each="category : ${categories}" th:value="${category.getCategoryID()}" th:text="${category.getCategoryName()}"></option>
+  </select>
+  <br><br>
+
+  <label for="author">Author</label><br>
+  <div id="author" th:each="author : ${authors}">
+    <input type="checkbox" th:id="${author.authorID}"  name="author" th:value="${author.authorID}">
+    <label th:for="${author.authorID}" th:text="${author.authorName}"></label>
+  </div>
+  <br>
+
+  <label for="quantity">Quantity:</label><br>
+  <input type="number" min="1" id="quantity" name="quantity" step="1" required><br><br>
+
+  <label for="image1">Image 1:</label><br>
+  <input type="file" id="image1" name="frontImage" accept="image/*" required><br><br>
+
+  <label for="image2">Image 2:</label><br>
+  <input type="file" id="image2" name="backImage" accept="image/*" required><br><br>
+
+  <button type="submit">Upload Book</button>
+</form>
+
+</body>
+</html>
