@@ -4,13 +4,9 @@ import com.example.bookstore.entity.Author;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.Category;
 import com.example.bookstore.entity.Publisher;
-import com.example.bookstore.repository.AuthorRepository;
-import com.example.bookstore.repository.BookRepository;
-import com.example.bookstore.repository.CategoryRepository;
-import com.example.bookstore.repository.PublisherRepository;
 import com.example.bookstore.service.*;
 import com.example.bookstore.util.GenerateID;
-import com.example.bookstore.util.Util;
+import com.example.bookstore.util.SetAttributeUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 
-import static java.util.Arrays.*;
 
 @Controller
 public class HomeController {
@@ -31,7 +26,6 @@ public class HomeController {
     StockService stockService;
     GenerateID generateID;
 
-    Util util = new Util();
 
     @Autowired
     public HomeController(BookService bookService, AuthorService authorService, CategoryService categoryService, PublisherService publisherService, StockService stockService, GenerateID generateID) {
@@ -47,7 +41,7 @@ public class HomeController {
     public String index(Model model, HttpSession session)
     {
         List<Book> bookList = bookService.findAll();
-        util.setInfoString(model, session, bookList, categoryService, authorService);
+        SetAttributeUtil.getInstance().setAttributeString(model, session, bookList, categoryService, authorService);
         session.setAttribute("order","default");
         return "shop";
     }

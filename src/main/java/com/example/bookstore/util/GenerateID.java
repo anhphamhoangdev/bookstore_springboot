@@ -4,13 +4,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GenerateID {
+    private EntityManager entityManager;
 
     @Autowired
-    private EntityManager entityManager;
+    public GenerateID(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     public String generateId(String query, String prefix) {
         String lastId;
         try {

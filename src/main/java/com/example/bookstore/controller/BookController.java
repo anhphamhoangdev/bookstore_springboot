@@ -1,10 +1,9 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.entity.*;
-import com.example.bookstore.repository.*;
 import com.example.bookstore.service.*;
 import com.example.bookstore.util.GenerateID;
-import com.example.bookstore.util.Util;
+import com.example.bookstore.util.SetAttributeUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,14 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.sql.rowset.serial.SerialException;
-import javax.swing.event.HyperlinkEvent;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -34,7 +31,6 @@ public class BookController {
     StockService stockService;
     GenerateID generateID;
 
-    Util util = new Util();
 
     @Autowired
     public BookController(BookService bookService, AuthorService authorService, CategoryService categoryService, PublisherService publisherService, StockService stockService, GenerateID generateID) {
@@ -123,7 +119,7 @@ public class BookController {
     public String index(Model model, @RequestParam("name") String bookName, HttpSession session)
     {
         List<Book> bookList = bookService.findBookByName(bookName);
-        return util.setInfoString(model, session, bookList, categoryService, authorService);
+        return SetAttributeUtil.getInstance().setAttributeString(model, session, bookList, categoryService, authorService);
     }
 
 
@@ -140,7 +136,7 @@ public class BookController {
     @GetMapping("/price")
     public String searchByPrice(@RequestParam("min") double min, @RequestParam("max") double max, Model model, HttpSession session) {
         List<Book> bookList = bookService.findBookByPrice(min, max);
-        return util.setInfoString(model, session, bookList, categoryService, authorService);
+        return SetAttributeUtil.getInstance().setAttributeString(model, session, bookList, categoryService, authorService);
     }
 
 

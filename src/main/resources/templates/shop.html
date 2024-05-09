@@ -207,9 +207,9 @@
               <!-- Product Meta Data -->
               <div class="product-meta-data">
                 <div class="line"></div>
-                <p class="product-price" th:text="'$' + ${book.sellPrice}">$180</p>
+                <p class="product-price" style="margin-left: 5px" th:text="'$' + ${book.sellPrice}">$180</p>
                 <a th:href="@{'/product-details?id=' + ${book.bookID}}">
-                  <h6 th:text="${book.bookName}">Modern Chair</h6>
+                  <h6 style="margin-left: 5px; font-size: 18px" th:text="${book.bookName}" onmouseover="this.style.color='#FBB711'" onmouseleave="this.style.color='#000000'">Modern Chair</h6>
                 </a>
               </div>
               <!-- Ratings & Cart -->

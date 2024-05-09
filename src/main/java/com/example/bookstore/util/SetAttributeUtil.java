@@ -10,8 +10,24 @@ import org.springframework.ui.Model;
 
 import java.util.List;
 
-public class Util {
-    public String setInfoString(Model model, HttpSession session, List<Book> bookList, CategoryService categoryService, AuthorService authorService) {
+public class SetAttributeUtil {
+    private static SetAttributeUtil instance;
+
+    private SetAttributeUtil() {
+    }
+
+    public static SetAttributeUtil getInstance() {
+        if (instance == null) {
+            synchronized (SetAttributeUtil.class) {
+                if (instance == null) {
+                    instance = new SetAttributeUtil();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public String setAttributeString(Model model, HttpSession session, List<Book> bookList, CategoryService categoryService, AuthorService authorService) {
         model.addAttribute("books", bookList);
         session.setAttribute("books", bookList);
         List<Category> categories = categoryService.findALl();

@@ -1,11 +1,10 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.entity.Author;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.Category;
 import com.example.bookstore.service.AuthorService;
 import com.example.bookstore.service.CategoryService;
-import com.example.bookstore.util.Util;
+import com.example.bookstore.util.SetAttributeUtil;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import java.util.List;
 public class CategoryController {
     CategoryService categoryService;
     AuthorService authorService;
-    Util util = new Util();
     @Autowired
     public CategoryController(CategoryService categoryService, AuthorService authorService) {
         this.categoryService = categoryService;
@@ -33,6 +31,6 @@ public class CategoryController {
         Category category = categoryService.getCategoryById(id);
         List<Book> bookList = category.getBook();
 
-        return util.setInfoString(model, session, bookList, categoryService, authorService);
+        return SetAttributeUtil.getInstance().setAttributeString(model, session, bookList, categoryService, authorService);
     }
 }
