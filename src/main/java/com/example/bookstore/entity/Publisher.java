@@ -22,6 +22,9 @@ public class Publisher {
     })
     private List<Book> books;
 
+    public Publisher() {
+    }
+
     public String getPublisherID() {
         return publisherID;
     }

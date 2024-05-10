@@ -12,8 +12,10 @@ public class Stock {
     @Column(name = "import_price")
     private double importPrice;
 
+    public Stock() {
+    }
 
-    //Getter and setter
+//Getter and setter
 
 
     public String getBookID() {

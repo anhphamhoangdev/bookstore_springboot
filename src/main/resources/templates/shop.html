@@ -17,10 +17,10 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <!-- Title  -->
-  <title>BOOKSTORE | Home</title>
+  <title>BOOKSTORE | Shop</title>
 
   <!-- Favicon  -->
-  <link th:rel="icon" th:href="@{/img/core-img/favicon.ico}">
+  <link th:rel="icon" th:href="@{img/core-img/favicon.ico}">
 
   <!-- Core Style CSS -->
   <link th:rel="stylesheet" th:href="@{/css/core-style.css}">
@@ -77,7 +77,18 @@
     <!-- Amado Nav -->
     <nav class="amado-nav">
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li th:if="${session.user != null}" style="margin-bottom: 10px">
+          Hello, <span th:text="${session.user.firstName + '!'}"></span>
+        </li>
+        <li th:if="${session.user != null}">
+          <form method="post" th:action="@{/logout}" id="logout">
+            <a onclick="submitForm()" class="login__button">Log Out</a>
+          </form>
+
+        </li>
+        <li th:unless="${session.user != null}">
+          <a th:href="@{/login}">Login</a>
+        </li>
         <li class="active"><a href="shop.html">Shop</a></li>
         <li><a href="product-details.html">Product</a></li>
         <li><a href="cart.html">Cart</a></li>
@@ -332,7 +343,15 @@
 <script src="js/plugins.js"></script>
 <!-- Active js -->
 <script src="js/active.js"></script>
+<script>
+  function submitForm() {
+    // Lấy tham chiếu đến biểu mẫu
+    var form = document.getElementById('logout');
 
+    // Gửi biểu mẫu
+    form.submit();
+  }
+</script>
 </body>
 
 </html>

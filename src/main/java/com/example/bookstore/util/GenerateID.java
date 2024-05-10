@@ -50,4 +50,10 @@ public class GenerateID {
         String query = "SELECT p.publisherID FROM Publisher p ORDER BY p.publisherID DESC";
         return generateId(query, "PUBL");
     }
+
+    public String generateUserId()
+    {
+        String query = "SELECT u.userID FROM User u ORDER BY u.userID DESC";
+        return generateId(query, "USER");
+    }
 }

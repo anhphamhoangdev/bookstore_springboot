@@ -1,17 +1,17 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.entity.Author;
-import com.example.bookstore.entity.Book;
-import com.example.bookstore.entity.Category;
-import com.example.bookstore.entity.Publisher;
+import com.example.bookstore.entity.*;
 import com.example.bookstore.service.*;
 import com.example.bookstore.util.GenerateID;
 import com.example.bookstore.util.SetAttributeUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
@@ -24,24 +24,33 @@ public class HomeController {
     CategoryService categoryService;
     PublisherService publisherService;
     StockService stockService;
+    UserService userService;
     GenerateID generateID;
 
 
     @Autowired
-    public HomeController(BookService bookService, AuthorService authorService, CategoryService categoryService, PublisherService publisherService, StockService stockService, GenerateID generateID) {
+    public HomeController(BookService bookService, AuthorService authorService, CategoryService categoryService, PublisherService publisherService, StockService stockService, UserService userService, GenerateID generateID) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.categoryService = categoryService;
         this.publisherService = publisherService;
         this.stockService = stockService;
+        this.userService = userService;
         this.generateID = generateID;
     }
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String index(Model model, HttpSession session)
     {
         List<Book> bookList = bookService.findAll();
         SetAttributeUtil.getInstance().setAttributeString(model, session, bookList, categoryService, authorService);
+        if(session.getAttribute("SPRING_SECURITY_CONTEXT") != null)
+        {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
+            User user = userService.findByUsername(username);
+            session.setAttribute("user", user);
+        }
         session.setAttribute("order","default");
         return "shop";
     }
