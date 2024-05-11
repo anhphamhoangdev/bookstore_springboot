@@ -11,6 +11,11 @@ public class TestController {
         return "login";
     }
 
+    @RequestMapping("/signup")
+    public String signup(){
+        return "signup";
+    }
+
     @RequestMapping("/show403page")
     public String forbiddenPage(){
         return "403";

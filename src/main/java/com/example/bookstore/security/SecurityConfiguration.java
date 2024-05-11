@@ -28,7 +28,7 @@ public class SecurityConfiguration {
         return daoAuthenticationProvider;
     }
 
-    
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -45,7 +45,12 @@ public class SecurityConfiguration {
                 logout-> logout.permitAll().logoutSuccessUrl("/")
         ).exceptionHandling(
                 exception -> exception.accessDeniedPage("/show403page")
+        ).rememberMe(rememberMe ->
+                rememberMe
+                        .key("remember-me")
+                        .tokenValiditySeconds(3600)
         );
+
         return http.build();
     }
 

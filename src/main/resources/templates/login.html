@@ -14,23 +14,61 @@
 
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        .alert {
+            padding: 15px;
+            background-color: #f44336;
+            color: white;
+        }
+
+        .text{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .space-before {
+            margin-left: 5px;
+        }
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
 </head>
 <body>
+<div th:if="${param.error}">
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <div class="text">
+            <strong>Login Failed ! </strong> <span class="space-before"> Wrong username or password...</span>
+        </div>
+
+    </div>
+</div>
 <div class="login">
     <div class="login__content">
         <div class="login__img">
-            <img src="assets/img/img-login.svg" alt="">
+            <img src="assets/img/Untitled.svg" alt="">
         </div>
 
         <div class="login__forms" style="margin-top: 70px">
             <form action="#" th:action="@{/authenticateTheUser}" class="login__registre" id="login-in" method="post">
-                <h1 class="login__title">Sign In</h1>
+
 
                 <div class="login__box">
                     <i class='bx bx-user login__icon'></i>
-                    <input type="email" name="username" placeholder="Username" class="login__input">
-
-
+                    <input type="text" name="username" placeholder="Username" class="login__input">
                 </div>
 
                 <div class="login__box">
@@ -38,13 +76,12 @@
                     <input type="password" name="password" placeholder="Password" class="login__input">
                 </div>
                 <div class="login__forgot">
-                    <input type="checkbox" name="cookie" placeholder="Type your password" id="cookie" value="checked" checked>
-                    <label for="cookie">Remember me</label>
+                    <input type="checkbox" name="remember-me" id="cookie" checked>
+                    <label for="cookie">Remember me for a month</label>
                 </div>
 
-
-                <a onclick="submitForm()" class="login__button">Sign In</a>
-                <a href="#">Forgot password?</a><br><br>
+                <a onclick="submitForm()" class="login__button" id="signin-button">Sign In</a>
+                <a class="login__signin" style="font-size: 15px" href="#">Forgot password?</a><br><br>
                 or sign in with
                 <div class="login__social">
                     <a href="#" class="login__social-icon"><i class='bx bxl-facebook' ></i></a>
@@ -53,7 +90,7 @@
                 </div>
                 <div>
                     <span class="login__account">Don't have an Account ?</span>
-                    <span class="login__signin" id="sign-up">Sign Up</span>
+                    <a th:href="@{/signup}" class="login__signin" id="sign-up">Sign Up</a>
                 </div>
             </form>
 
@@ -72,6 +109,20 @@
         // Gửi biểu mẫu
         form.submit();
     }
+    document.addEventListener('keydown', function(event) {
+        var signinButton = document.getElementById('signin-button');
+        var focusedElement = document.activeElement;
+
+        // Kiểm tra nếu phím Enter được nhấn và trường input đang được focus
+        if (event.key === 'Enter' && focusedElement.tagName === 'INPUT') {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của phím Enter (submit form)
+
+            // Kích hoạt sự kiện click trên thẻ a "Sign In"
+            if (signinButton) {
+                signinButton.click();
+            }
+        }
+    });
 </script>
 </body>
 </html>
