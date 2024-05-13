@@ -29,7 +29,6 @@ public class SecurityConfiguration {
     }
 
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configure ->
@@ -44,13 +43,12 @@ public class SecurityConfiguration {
         ).logout(
                 logout-> logout.permitAll().logoutSuccessUrl("/")
         ).exceptionHandling(
-                exception -> exception.accessDeniedPage("/show403page")
+                exception -> exception.accessDeniedPage("/access-denied")
         ).rememberMe(rememberMe ->
                 rememberMe
                         .key("remember-me")
-                        .tokenValiditySeconds(3600)
+                        .tokenValiditySeconds(2592000)
         );
-
         return http.build();
     }
 

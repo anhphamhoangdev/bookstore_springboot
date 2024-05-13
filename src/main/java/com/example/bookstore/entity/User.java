@@ -164,4 +164,10 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public void addRoles(Role role)
+    {
+        if(roles == null) roles = new ArrayList<>();
+        roles.add(role);
+    }
 }

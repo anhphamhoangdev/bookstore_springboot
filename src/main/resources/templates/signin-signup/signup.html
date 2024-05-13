@@ -31,19 +31,23 @@
 <body>
 
 <div class="login">
+
     <div class="login__content" style="margin-left: 15px">
-        <form action="#" th:action="@{/authenticateTheUser}" id="sign-up" method="post" class="sign__up">
+        <form action="#" th:action="@{/process-signup}" th:object="${registerUser}"  id="sign-up" method="post" class="sign__up">
+            <div th:if="${myError}" class="alert alert-danger">
+                <span th:text="${myError}"></span>
+            </div>
             <div class="row">
                 <div class="col">
                     <div class="login__box">
                         <i class='bx bx-user login__icon'></i>
-                        <input type="text" name="firstname" placeholder="First name" class="login__input" required>
+                        <input type="text" th:field="*{firstName}" name="firstname" placeholder="First name" class="login__input" required>
                     </div>
                 </div>
                 <div class="col">
                     <div class="login__box">
                         <i class='bx bx-user login__icon'></i>
-                        <input type="text" name="lastname" placeholder="Last name" class="login__input" re>
+                        <input type="text" th:field="*{lastName}" name="lastname" placeholder="Last name" class="login__input" required>
                     </div>
                 </div>
             </div>
@@ -51,21 +55,39 @@
                 <div class="col">
                     <div class="login__box">
                         <i class='bx bx-user-circle login__icon' ></i>
-                        <input type="text" name="username" placeholder="Username" class="login__input">
+                        <input type="text" th:field="*{username}" name="username" placeholder="Username" class="login__input" required>
                     </div>
+                </div>
+            </div>
+            <div class="row" style="text-align: left" th:if="${#fields.hasErrors('username')}">
+                <div class="col">
+                    <span style="color: red" th:each="e : ${#fields.errors('username')}" th:text="${'*' + e}">LOI USERNAME</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="login__box">
+                        <i class='bx bx-key login__icon'></i>
+                        <input type="password" th:field="*{password}" name="password" placeholder="Password" class="login__input" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="text-align: left" th:if="${#fields.hasErrors('password')}">
+                <div class="col">
+                    <span style="color: red" th:each="e : ${#fields.errors('password')}" th:text="${'*' + e}">LOI PASSWORD</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="login__box">
                         <i class='bx bx-envelope login__icon'></i>
-                        <input type="email" name="email" placeholder="Email" class="login__input">
+                        <input type="email" th:field="*{email}" name="email" placeholder="Email" class="login__input" required>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                        <select name="gender" class="login__box login__input" style="width: 300px" >
+                        <select name="gender" th:field="*{gender}" class="login__box login__input" style="width: 300px">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="other">Other</option>
@@ -73,17 +95,17 @@
                 </div>
                 <div class="col">
                     <div class="login__box">
-                        <input type="date" name="dob" placeholder="dob" class="login__input">
+                        <input type="date" th:field="*{birthday}" name="dob" placeholder="dob" class="login__input" required>
                     </div>
                 </div>
             </div>
             <div class="login__box">
                 <i class='bx bx-location-plus login__icon' ></i>
-                <input type="text" name="address" placeholder="Address" class="login__input">
+                <input type="text" th:field="*{address}" name="address" placeholder="Address" class="login__input" required>
             </div>
             <div class="login__box">
                 <i class='bx bxs-phone-call login__icon'></i>
-                <input type="text" name="phonenum" placeholder="Phone number" class="login__input">
+                <input type="text" th:field="*{phoneNum}" name="phonenum" placeholder="Phone number" class="login__input">
             </div>
             <button style="width: 624px" class="login__button">Sign Up</button>
             Back to

@@ -25,6 +25,6 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public Publisher getPublisherById(String id) {
-        return publisherRepository.getReferenceById(id);
+        return publisherRepository.findById(id).orElse(null);
     }
 }

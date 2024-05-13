@@ -3,7 +3,7 @@ package com.example.bookstore.controller;
 import com.example.bookstore.entity.*;
 import com.example.bookstore.service.*;
 import com.example.bookstore.util.GenerateID;
-import com.example.bookstore.util.SetAttributeUtil;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,7 +27,6 @@ public class BookController {
     AuthorService authorService;
     CategoryService categoryService;
     PublisherService publisherService;
-
     StockService stockService;
     GenerateID generateID;
 
@@ -115,28 +114,38 @@ public class BookController {
         return "redirect:/";
     }
 
+
+
     @GetMapping("/search")
-    public String index(Model model, @RequestParam("name") String bookName, HttpSession session)
+    public String index(@RequestParam("name") String bookName, HttpSession session)
     {
         List<Book> bookList = bookService.findBookByName(bookName);
-        return SetAttributeUtil.getInstance().setAttributeString(model, session, bookList, categoryService, authorService);
+        session.setAttribute("books", bookList);
+        return "shop";
     }
 
 
     @GetMapping("/product-details")
-    public String index(@RequestParam("id") String id,Model model)
+    public String index(@RequestParam("id") String id, Model model, HttpSession session)
     {
-        Stock stock = stockService.getStockById(id);
         Book book = bookService.getBookById(id);
+        if(book == null)
+        {
+            session.setAttribute("error", "BOOK NOT FOUND...");
+            throw new EntityNotFoundException("Book not found");
+        }
+        Stock stock = stockService.getStockById(id);
         model.addAttribute("book", book);
         model.addAttribute("stock", stock);
         return "product-details";
+
     }
 
     @GetMapping("/price")
     public String searchByPrice(@RequestParam("min") double min, @RequestParam("max") double max, Model model, HttpSession session) {
         List<Book> bookList = bookService.findBookByPrice(min, max);
-        return SetAttributeUtil.getInstance().setAttributeString(model, session, bookList, categoryService, authorService);
+        session.setAttribute("books", bookList);
+        return "shop";
     }
 
 
@@ -155,8 +164,6 @@ public class BookController {
             model.addAttribute("order", "desc");
         } else model.addAttribute("order", "default");
         session.setAttribute("books", bookList);
-        model.addAttribute("books", bookList);
-        // Trả về kết quả hoặc thông báo thành công
         return "shop";
     }
 

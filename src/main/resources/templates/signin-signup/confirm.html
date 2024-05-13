@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>BOOKSTORE | Sign In</title>
+
+    <!-- Favicon  -->
+    <link th:rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+
+    <!-- ===== BOX ICONS ===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .alert {
+            padding: 15px;
+            background-color: #f44336;
+            color: white;
+        }
+
+        .text{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .space-before {
+            margin-left: 5px;
+        }
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login">
+    <div class="login__content">
+        <div class="login__img">
+            <img src="assets/img/Untitled.svg" alt="">
+        </div>
+
+        <div class="login__forms" style="margin-top: 70px">
+
+            <div class="login__registre">
+                <i class='bx bx-check-circle' style="color: #FBB711; font-size: 100px"></i>
+                <h2>CONGRATULATIONS !</h2>
+                <p style="font-size: 18px">Your account has been successfully created.</p>
+                <a th:href="@{/login}" class="login__button" id="signin-button">Continue to Sign In</a>
+                Go to
+                <a class="login__signin" style="font-size: 15px" th:href="@{/}">Home Page</a><br><br><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--===== MAIN JS =====-->
+<script src="assets/js/main.js"></script>
+<script>
+    function submitForm() {
+        // Lấy tham chiếu đến biểu mẫu
+        var form = document.getElementById('login-in');
+
+        // Gửi biểu mẫu
+        form.submit();
+    }
+    document.addEventListener('keydown', function(event) {
+        var signinButton = document.getElementById('signin-button');
+        var focusedElement = document.activeElement;
+
+        // Kiểm tra nếu phím Enter được nhấn và trường input đang được focus
+        if (event.key === 'Enter' && focusedElement.tagName === 'INPUT') {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của phím Enter (submit form)
+
+            // Kích hoạt sự kiện click trên thẻ a "Sign In"
+            if (signinButton) {
+                signinButton.click();
+            }
+        }
+    });
+</script>
+</body>
+</html>
