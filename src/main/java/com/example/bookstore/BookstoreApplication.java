@@ -1,14 +1,12 @@
 package com.example.bookstore;
 
-import com.example.bookstore.entity.Author;
-import com.example.bookstore.entity.Book;
-import com.example.bookstore.entity.Category;
-import com.example.bookstore.entity.Publisher;
+import com.example.bookstore.entity.*;
 import com.example.bookstore.repository.AuthorRepository;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.CategoryRepository;
 import com.example.bookstore.repository.PublisherRepository;
 import com.example.bookstore.service.BookService;
+import com.example.bookstore.service.UserService;
 import com.example.bookstore.util.GenerateID;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -16,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -27,13 +26,13 @@ public class BookstoreApplication {
     }
 
 //    @Bean
-//    public CommandLineRunner commandLineRunner(AuthorRepository authorRepository, BookService bookService, CategoryRepository categoryRepository, PublisherRepository publisherRepository, GenerateID generateID, EntityManager entityManager)
+//    public CommandLineRunner commandLineRunner(UserService userService, BookService bookService, CategoryRepository categoryRepository, PublisherRepository publisherRepository, GenerateID generateID, EntityManager entityManager)
 //    {
 //        return runner -> {
-//            Transactional transactional;
-//            transactional.sta
-//            List<Book> bookList = bookService.findAll();
-//            List<Author> authors = bookList.get(0).getAuthors();
+//            User user = userService.findByUsername("hoanganh033");
+//            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//            boolean isMatch = bCryptPasswordEncoder.matches("Hoanganh123", user.getPassword());
+//            System.out.println(isMatch);
 //            //            Author author = new Author();
 ////            author.setAuthorID(generateID.generateAuthorId());
 ////            author.setAuthorName("Ronaldo");

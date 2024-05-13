@@ -7,4 +7,6 @@ public interface FavoriteService {
     public void save(Favorite favorite);
 
     public Favorite findByUserId(String userId);
+
+    public Favorite merge(Favorite favorite);
 }

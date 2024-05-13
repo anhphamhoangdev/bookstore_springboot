@@ -2,6 +2,7 @@ package com.example.bookstore.service;
 
 import com.example.bookstore.entity.Cart;
 import com.example.bookstore.repository.CartRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,15 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional
     public void save(Cart cart) {
         cartRepository.save(cart);
     }
+
+    @Override
+    public Cart findByUserId(String userId) {
+        return cartRepository.findById(userId).orElse(null);
+    }
+
+
 }

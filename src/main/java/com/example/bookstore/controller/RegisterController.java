@@ -104,7 +104,6 @@ public class RegisterController {
         cart.setUserID(user.getUserID());
         cartService.save(cart);
 
-
         userService.save(user);
         return "signin-signup/confirm";
     }

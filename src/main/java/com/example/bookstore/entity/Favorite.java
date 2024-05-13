@@ -44,4 +44,8 @@ public class Favorite {
         if(books == null) books = new ArrayList<>();
         books.add(book);
     }
+
+    public void deleteBook(Book book) {
+        if(books.contains(book)) books.remove(book);
+    }
 }

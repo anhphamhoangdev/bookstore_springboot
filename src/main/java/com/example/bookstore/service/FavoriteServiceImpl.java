@@ -29,7 +29,10 @@ public class FavoriteServiceImpl implements FavoriteService {
         return favoriteRepository.findById(userId).orElse(null);
     }
 
-
+    @Override
+    public Favorite merge(Favorite favorite) {
+        return favoriteRepository.saveAndFlush(favorite);
+    }
 
 
 }

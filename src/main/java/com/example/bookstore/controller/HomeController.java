@@ -41,7 +41,6 @@ public class HomeController {
     @RequestMapping("/")
     public String index(HttpSession session)
     {
-
         return "shop";
     }
 
