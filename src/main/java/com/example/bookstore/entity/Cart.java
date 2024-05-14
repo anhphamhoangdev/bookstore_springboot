@@ -46,4 +46,8 @@ public class Cart
         if(lineItemList == null) lineItemList = new ArrayList<>();
         lineItemList.add(lineItem);
     }
+
+    public void deleteLineItem(LineItem lineItem) {
+        if(lineItemList.contains(lineItem)) lineItemList.remove(lineItem);
+    }
 }

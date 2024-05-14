@@ -56,4 +56,16 @@ public class GenerateID {
         String query = "SELECT u.userID FROM User u ORDER BY u.userID DESC";
         return generateId(query, "USER");
     }
+
+    public String generateStockId()
+    {
+        String query = "SELECT s.stockID FROM Stock s ORDER BY s.stockID DESC";
+        return generateId(query, "STOC");
+    }
+
+    public String generateLineItemId()
+    {
+        String query = "SELECT l.lineItemID FROM LineItem l ORDER BY l.lineItemID DESC";
+        return generateId(query, "LINE");
+    }
 }

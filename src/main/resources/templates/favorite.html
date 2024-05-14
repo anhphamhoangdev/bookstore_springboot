@@ -23,7 +23,7 @@
     <title>BOOKSTORE | Shop</title>
 
     <!-- Favicon  -->
-    <link th:rel="icon" th:href="@{img/core-img/favicon.ico}">
+    <link th:rel="icon" th:href="@{../img/core-img/favicon.ico}">
 
     <!-- Core Style CSS -->
     <link th:rel="stylesheet" th:href="@{/css/core-style.css}">
@@ -92,9 +92,9 @@
                 <li th:unless="${session.user != null}">
                     <a th:href="@{/login}">Login</a>
                 </li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="cart.html">Cart<span th:if="${session.user != null}" th:text=" ' ('+100+') ' "> (0) </span></a></li>
-                <li  class="active"><a th:href="@{/favorite}">Favorite</a></li>
+                <li><a th:href="@{/}">Shop</a></li>
+                <li><a th:href="@{/cart}">Cart<span th:if="${session.user != null}" th:text=" ' ('+${session.cart.getLineItemList().size()}+') ' "> (0) </span></a></li>
+                <li class="active"><a th:href="@{/favorite}">Favorite</a></li>
             </ul>
         </nav>
 
@@ -131,7 +131,7 @@
                                 </a>
                                 <div class="">
                                     <a th:href="@{'/product-details?id=' + ${book.bookID}}" class="nav-link" th:text="${book.bookName}">Winter jacket for men and lady</a>
-                                    <!--<p class="text-muted">Yellow, Jeans</p> -->
+                                    <!--<p class="text-muted">Yellow, Jeans</p>-->
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                     </div>
                     <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
                         <div class="float-md-end">
-                            <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fa-solid fa-cart-shopping px-1 text-secondary"></i></a>
+                            <a th:href="@{'/cart/add-to-cart?bookID=' + ${book.bookID} + '&quantity=1'}" class="btn btn-light border px-2 icon-hover-primary"><i class="fa-solid fa-cart-shopping px-1 text-secondary"></i></a>
                             <a th:href="@{'/favorite/remove?id=' + ${book.bookID}}" class="btn btn-light border text-danger icon-hover-danger">Remove</a>
                         </div>
                     </div>

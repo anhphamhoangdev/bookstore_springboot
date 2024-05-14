@@ -91,8 +91,8 @@
         <li th:unless="${session.user != null}">
           <a th:href="@{/login}">Login</a>
         </li>
-        <li class="active"><a href="shop.html">Shop</a></li>
-        <li><a href="cart.html">Cart<span th:if="${session.user != null}" th:text=" ' ('+100+') ' "> (0) </span></a></li>
+        <li class="active"><a th:href="@{/}">Shop</a></li>
+        <li><a th:href="@{/cart}">Cart<span th:if="${session.user != null}" th:text=" ' ('+${session.cart.getLineItemList().size()}+') ' "> (0) </span></a></li>
         <li><a th:href="@{/favorite}">Favorite</a></li>
       </ul>
     </nav>
@@ -235,17 +235,17 @@
                   <div class="cart">
                     <div th:if="${session.favorite.getBook().contains(book)}">
                       <a th:href="@{'/favorite/remove?id=' + ${book.bookID}}" style="margin-right: 12px" data-toggle="tooltip" data-placement="left" title="Add to Favorite"><i class="fa-solid fa-heart fa-2x" size="100"></i></a>
-                      <a  style="margin-right: 10px" data-toggle="tooltip" data-placement="left" title="Add to Cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
+                      <a th:href="@{'/cart/add-to-cart?bookID=' + ${book.bookID}}" th:if="${book.getStock().getQuantity() > 0}"  style="margin-right: 10px" data-toggle="tooltip" data-placement="left" title="Add to Cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
                     </div>
                     <div th:unless="${session.favorite.getBook().contains(book)}">
                       <a th:href="@{'/favorite/add-to-favorite?id=' + ${book.bookID}}"  style="margin-right: 12px" data-toggle="tooltip" data-placement="left" title="Add to Favorite"><i class="fa-regular fa-heart fa-2x" size="100"></i></a>
-                      <a  style="margin-right: 10px" data-toggle="tooltip" data-placement="left" title="Add to Cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
+                      <a th:href="@{'/cart/add-to-cart?bookID=' + ${book.bookID} +'&quantity=1'}" th:if="${book.getStock().getQuantity() > 0}"  style="margin-right: 10px" data-toggle="tooltip" data-placement="left" title="Add to Cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
                     </div>
                   </div>
                 </div>
                 <div th:unless="${session.favorite != null}">
                       <a th:href="@{/favorite}"  style="margin-right: 12px" data-toggle="tooltip" data-placement="left" title="Add to Favorite"><i class="fa-solid fa-heart fa-2x" size="100"></i></a>
-                      <a  style="margin-right: 10px" data-toggle="tooltip" data-placement="left" title="Add to Cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
+                      <a th:href="@{/cart}"  style="margin-right: 10px" data-toggle="tooltip" data-placement="left" title="Add to Cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
                   </div>
                 </div>
               </div>

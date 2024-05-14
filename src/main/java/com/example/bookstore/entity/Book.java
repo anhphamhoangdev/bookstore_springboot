@@ -1,6 +1,9 @@
 package com.example.bookstore.entity;
 
+import com.example.bookstore.service.StockService;
+import com.example.bookstore.service.StockServiceImpl;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Blob;
 import java.sql.Date;
@@ -53,6 +56,12 @@ public class Book {
     })
     @JoinColumn(name = "category_id")
     private Category category;
+
+
+    @OneToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
+
 
     @Lob
     private Blob bookFrontImage;
@@ -151,7 +160,15 @@ public class Book {
         this.bookBackImage = bookBackImage;
     }
 
-    // method
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
+// method
 
     @Override
     public String toString() {
@@ -167,4 +184,6 @@ public class Book {
         if(authors == null) authors = new ArrayList<>();
         authors.add(author);
     }
+
+
 }

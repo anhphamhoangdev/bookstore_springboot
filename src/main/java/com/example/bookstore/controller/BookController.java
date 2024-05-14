@@ -107,7 +107,8 @@ public class BookController {
 
         // stock
         Stock stock = new Stock();
-        stock.setBookID(newBook.getBookID());
+        stock.setStockID(generateID.generateStockId());
+        stock.setBook(newBook);
         stock.setQuantity(Integer.parseInt(quantity));
         stock.setImportPrice(Double.parseDouble(importPrice));
         stockService.save(stock);
@@ -134,7 +135,7 @@ public class BookController {
             session.setAttribute("error", "BOOK NOT FOUND...");
             throw new EntityNotFoundException("Book not found");
         }
-        Stock stock = stockService.getStockById(id);
+        Stock stock = book.getStock();
         model.addAttribute("book", book);
         model.addAttribute("stock", stock);
         return "product-details";

@@ -1,9 +1,7 @@
 package com.example.bookstore.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
 
 @Entity
 public class LineItem {
@@ -14,25 +12,18 @@ public class LineItem {
 
     private int quantity;
 
-    @Column(name = "book_id")
-    private String bookID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Book book;
 
     public LineItem() {
     }
 
-    public LineItem(String bookID, String lineItemID, Integer quantity) {
-        this.bookID = bookID;
+    public LineItem(Book book, String lineItemID, int quantity) {
+        this.book = book;
         this.lineItemID = lineItemID;
         this.quantity = quantity;
     }
 
-    public String getBookID() {
-        return bookID;
-    }
-
-    public void setBookID(String bookID) {
-        this.bookID = bookID;
-    }
 
     public String getLineItemID() {
         return lineItemID;
@@ -42,11 +33,22 @@ public class LineItem {
         this.lineItemID = lineItemID;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+
 }

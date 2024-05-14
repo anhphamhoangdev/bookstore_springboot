@@ -61,7 +61,7 @@ public class FavoriteController {
         favorite.addBook(book);
         favoriteService.merge(favorite);
         session.setAttribute("favorite", favorite);
-        return "shop";
+        return "favorite";
     }
 
 

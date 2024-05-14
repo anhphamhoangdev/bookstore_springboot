@@ -6,6 +6,8 @@ import com.example.bookstore.entity.Favorite;
 public interface CartService {
     public void save(Cart cart);
 
+    public void merge(Cart cart);
+
     public Cart findByUserId(String userId);
 
 }

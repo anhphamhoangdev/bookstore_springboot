@@ -23,9 +23,16 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void merge(Cart cart) {
+        cartRepository.saveAndFlush(cart);
+    }
+
+    @Override
     public Cart findByUserId(String userId) {
         return cartRepository.findById(userId).orElse(null);
     }
+
+
 
 
 }

@@ -4,13 +4,18 @@ import jakarta.persistence.*;
 
 @Entity
 public class Stock {
+
     @Id
-    @Column(name = "book_id")
-    private String bookID;
+    private String stockID;
+
+
     private int quantity;
 
     @Column(name = "import_price")
     private double importPrice;
+
+    @OneToOne(mappedBy = "stock")
+    private Book book;
 
     public Stock() {
     }
@@ -18,13 +23,23 @@ public class Stock {
 //Getter and setter
 
 
-    public String getBookID() {
-        return bookID;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookID(String bookID) {
-        this.bookID = bookID;
+    public void setBook(Book book) {
+        this.book = book;
     }
+
+    public String getStockID() {
+        return stockID;
+    }
+
+    public void setStockID(String stockID) {
+        this.stockID = stockID;
+    }
+
+
 
     public int getQuantity() {
         return quantity;
