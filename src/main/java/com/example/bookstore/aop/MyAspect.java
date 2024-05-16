@@ -77,6 +77,7 @@ public class MyAspect {
             session.setAttribute("favorite", favorite);
             Cart cart = cartService.findByUserId(user.getUserID());
             session.setAttribute("cart", cart);
+            List<LineItem> lineItems = (List<LineItem>) cart.getLineItemList();
         }
         Object result = joinPoint.proceed();
         return result;

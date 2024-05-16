@@ -12,5 +12,6 @@ public interface StockService {
     public Stock getStockById(String id);
 
 
+    public void merge(Stock stock);
 
 }

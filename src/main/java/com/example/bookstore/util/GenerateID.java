@@ -68,4 +68,10 @@ public class GenerateID {
         String query = "SELECT l.lineItemID FROM LineItem l ORDER BY l.lineItemID DESC";
         return generateId(query, "LINE");
     }
+
+    public String generateBillId()
+    {
+        String query = "SELECT i.invoiceID FROM Invoice i ORDER BY i.invoiceID DESC";
+        return generateId(query, "BILL");
+    }
 }

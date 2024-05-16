@@ -13,7 +13,9 @@ public class Cart
     private String userID;
 
     @OneToMany
-    @JoinTable(name = "cart_line_items", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "line_item_id"))
+    @JoinTable(name = "cart_line_items",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "line_item_id"))
     private List<LineItem> lineItemList ;
 
 
@@ -49,5 +51,20 @@ public class Cart
 
     public void deleteLineItem(LineItem lineItem) {
         if(lineItemList.contains(lineItem)) lineItemList.remove(lineItem);
+    }
+
+    public Double subTotal() {
+        double subtotal = 0;
+        for(LineItem lineItem : this.lineItemList)
+        {
+            subtotal += lineItem.getQuantity()*lineItem.getBook().getSellPrice();
+        }
+        return subtotal;
+    }
+
+    public Double total() {
+        double subtotal = subTotal();
+        double total = subtotal - (subtotal*0);
+        return total;
     }
 }

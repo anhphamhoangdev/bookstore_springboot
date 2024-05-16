@@ -1,13 +1,12 @@
 package com.example.bookstore.entity;
 
-import com.example.bookstore.entity.Role;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -50,6 +49,9 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
+    @OneToMany()
+    private List<Invoice> invoices;
 
     // constructor
     public User() {
@@ -165,9 +167,24 @@ public class User {
         this.username = username;
     }
 
+
+    public List<Invoice> getInvoice() {
+        return invoices;
+    }
+
+    public void setInvoice(List<Invoice> invoice) {
+        this.invoices = invoice;
+    }
+
     public void addRoles(Role role)
     {
         if(roles == null) roles = new ArrayList<>();
         roles.add(role);
+    }
+
+    public void addInvoice(Invoice invoice)
+    {
+        if(invoices == null) invoices = new ArrayList<>();
+        invoices.add(invoice);
     }
 }

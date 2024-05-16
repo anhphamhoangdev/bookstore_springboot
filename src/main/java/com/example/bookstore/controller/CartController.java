@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/cart")
@@ -53,16 +55,15 @@ public class CartController {
         this.cartService = cartService;
     }
 
+
     @RequestMapping("")
     public String cart(HttpSession session){
         Cart cart = (Cart) session.getAttribute("cart");
         if(cart != null){
-            double totalPrice = 0;
-            for(LineItem lineItem : cart.getLineItemList())
-            {
-                totalPrice += lineItem.getQuantity()*lineItem.getBook().getSellPrice();
-            }
-            session.setAttribute("totalPrice", totalPrice);
+            double subtotal = cart.subTotal();
+            double total = cart.total();
+            session.setAttribute("subtotal", subtotal);
+            session.setAttribute("total", total);
         }
         return "cart";
     }
@@ -107,6 +108,7 @@ public class CartController {
     @RequestMapping("/update")
     public String update(HttpSession session, @RequestParam("bookID") String bookID, @RequestParam("quantity") int quantity){
         Cart cart = (Cart) session.getAttribute("cart");
+        List<LineItem> lineItemList = cart.getLineItemList();
         if(quantity < 0)
         {
             quantity = 1;
@@ -140,5 +142,7 @@ public class CartController {
         }
         return "cart";
     }
+
+
 
 }

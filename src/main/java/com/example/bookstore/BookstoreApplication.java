@@ -26,18 +26,14 @@ public class BookstoreApplication {
         SpringApplication.run(BookstoreApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(EmailSenderService emailSenderService)
-    {
-        return runner -> {
-
-            emailSenderService.sendSimpleMail("","","");
-
-
-
-
-
-        };
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(EmailSenderService emailSenderService)
+//    {
+//        return runner -> {
+//
+//            emailSenderService.sendSimpleMail("danghieuanh0401@gmail.com","HELLO","OK");
+//
+//        };
+//    }
 
 }

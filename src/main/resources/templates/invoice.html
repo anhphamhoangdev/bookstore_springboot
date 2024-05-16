@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6931f33cbe.js" crossorigin="anonymous"></script>
+    <!-- Title  -->
+    <title>BOOKSTORE | Invoice</title>
+
+    <!-- Favicon  -->
+    <link th:rel="icon" th:href="@{/img/core-img/favicon.ico}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+    <!-- Core Style CSS -->
+    <link th:rel="stylesheet" th:href="@{/css/core-style.css}">
+    <link th:rel="stylesheet" th:href="@{/style.css}">
+
+    <style>
+        body{margin-top:20px;
+            color: #2e323c;
+            background: #f5f6fa;
+            position: relative;
+            height: 100%;
+        }
+        .invoice-container {
+            padding: 1rem;
+        }
+        .invoice-container .invoice-header .invoice-logo {
+            margin: 0.8rem 0 0 0;
+            display: inline-block;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2e323c;
+        }
+        .invoice-container .invoice-header .invoice-logo img {
+            max-width: 130px;
+        }
+        .invoice-container .invoice-header address {
+            font-size: 0.8rem;
+            color: #9fa8b9;
+            margin: 0;
+        }
+        .invoice-container .invoice-details {
+            margin: 1rem 0 0 0;
+            padding: 1rem;
+            line-height: 180%;
+            background: #f5f6fa;
+        }
+        .invoice-container .invoice-details .invoice-num {
+            text-align: right;
+            font-size: 0.8rem;
+        }
+        .invoice-container .invoice-body {
+            padding: 1rem 0 0 0;
+        }
+        .invoice-container .invoice-footer {
+            text-align: center;
+            font-size: 0.7rem;
+            margin: 5px 0 0 0;
+        }
+
+        .invoice-status {
+            text-align: center;
+            padding: 1rem;
+            background: #ffffff;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .invoice-status h2.status {
+            margin: 0 0 0.8rem 0;
+        }
+        .invoice-status h5.status-title {
+            margin: 0 0 0.8rem 0;
+            color: #9fa8b9;
+        }
+        .invoice-status p.status-type {
+            margin: 0.5rem 0 0 0;
+            padding: 0;
+            line-height: 150%;
+        }
+        .invoice-status i {
+            font-size: 1.5rem;
+            margin: 0 0 1rem 0;
+            display: inline-block;
+            padding: 1rem;
+            background: #f5f6fa;
+            -webkit-border-radius: 50px;
+            -moz-border-radius: 50px;
+            border-radius: 50px;
+        }
+        .invoice-status .badge {
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 767px) {
+            .invoice-container {
+                padding: 1rem;
+            }
+        }
+
+
+        .custom-table {
+            border: 1px solid #e0e3ec;
+        }
+        .custom-table thead {
+            background: #007ae1;
+        }
+        .custom-table thead th {
+            border: 0;
+            color: #000000;
+        }
+        .custom-table > tbody tr:hover {
+            background: #fafafa;
+        }
+        .custom-table > tbody tr:nth-of-type(even) {
+            background-color: #ffffff;
+        }
+        .custom-table > tbody td {
+            border: 1px solid #e6e9f0;
+        }
+
+
+        .card {
+            background: #ffffff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 0;
+            margin-bottom: 1rem;
+        }
+
+        .text-success {
+            color: #00bb42 !important;
+        }
+
+        .text-muted {
+            color: #9fa8b9 !important;
+        }
+
+        .custom-actions-btns {
+            margin: auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .custom-actions-btns .btn {
+            margin: .3rem 0 .3rem .3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="invoice-container">
+                        <div class="invoice-header">
+                            <!-- Row start -->
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="custom-actions-btns mb-5">
+                                        <a href="#" class="btn btn-primary">
+                                            <i class="icon-download"></i> Download
+                                        </a>
+                                        <a href="javascript:window.print()" class="btn btn-secondary">
+                                            <i class="icon-printer"></i> Print
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Row end -->
+                            <!-- Row start -->
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <a th:href="@{/}" class="invoice-logo">
+                                        Online BookStore
+                                    </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <address class="text-right">
+                                        1 Vo Van Ngan Street, Linh Chiểu Ward.<br>
+                                        Thu Duc City, Ho Chi Minh City.<br>
+                                    </address>
+                                </div>
+                            </div>
+                            <!-- Row end -->
+                            <!-- Row start -->
+                            <div class="row gutters">
+                                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                    <div class="invoice-details">
+                                        <address>
+                                            <span th:text="${invoice.firstName}">Alex Maxwell</span><br>
+                                            <span th:text="${invoice.address}">150-600 Church Street, Florida, USA</span>
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                    <div class="invoice-details">
+                                        <div class="invoice-num">
+                                            <div th:text="${'#' + invoice.invoiceID}">Invoice - #009</div>
+                                            <div th:text="${invoice.orderDate}">January 10th 2020</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Row end -->
+                        </div>
+                        <div class="invoice-body">
+                            <!-- Row start -->
+                            <div class="row gutters">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table custom-table m-0">
+                                            <thead class="custom-table thead">
+                                            <tr>
+                                                <th>Books</th>
+                                                <th>Book ID</th>
+                                                <th>Quantity</th>
+                                                <th>Sub Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="lineitem : ${session.invoice.lineItems}">
+                                                <td>
+                                                    <span th:text="${lineitem.getBook().bookName}"></span>
+                                                    <p class="m-0 text-muted" th:text="${lineitem.getBook().getDescription()}">
+                                                        Reference site about Lorem Ipsum, giving information on its origins.
+                                                    </p>
+                                                </td>
+                                                <td th:text="${'#'+lineitem.getBook().getBookID()}">#50000981</td>
+                                                <td th:text="${lineitem.getQuantity()}">9</td>
+                                                <td th:text="${lineitem.getQuantity() * lineitem.getBook().sellPrice}">$5000.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="2">
+                                                    <p>
+                                                        Subtotal<br>
+                                                        Shipping &amp; Handling<br>
+                                                    </p>
+                                                    <h5 class="text-success"><strong>Grand Total</strong></h5>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <span th:text="${'$' + invoice.subTotal}">$5000.00</span><br>
+                                                        <span th:text="${'$' + invoice.subTotal}">$5000.00</span><br>
+                                                    </p>
+                                                    <h5 class="text-success" th:text="${'$' + invoice.total}"><strong>$5150.99</strong></h5>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Row end -->
+                        </div>
+                        <div class="invoice-footer">
+                            Thank you for your Business.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

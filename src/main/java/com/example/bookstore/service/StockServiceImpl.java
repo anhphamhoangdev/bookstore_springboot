@@ -31,7 +31,10 @@ public class StockServiceImpl implements StockService {
         return stockRepository.findById(id).orElse(null);
     }
 
-
+    @Override
+    public void merge(Stock stock) {
+        stockRepository.saveAndFlush(stock);
+    }
 
 
 }
