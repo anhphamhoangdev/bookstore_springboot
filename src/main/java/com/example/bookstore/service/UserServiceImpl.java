@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void merge(User user) {
+        userRepository.saveAndFlush(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
@@ -61,4 +66,6 @@ public class UserServiceImpl implements UserService {
         }
         return authorities;
     }
+
+
 }

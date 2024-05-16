@@ -198,16 +198,16 @@
                                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                                     <div class="invoice-details">
                                         <address>
-                                            <span th:text="${invoice.firstName}">Alex Maxwell</span><br>
-                                            <span th:text="${invoice.address}">150-600 Church Street, Florida, USA</span>
+                                            <span th:text="${session.invoice.firstName}">Alex Maxwell</span><br>
+                                            <span th:text="${session.invoice.address}">150-600 Church Street, Florida, USA</span>
                                         </address>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                                     <div class="invoice-details">
                                         <div class="invoice-num">
-                                            <div th:text="${'#' + invoice.invoiceID}">Invoice - #009</div>
-                                            <div th:text="${invoice.orderDate}">January 10th 2020</div>
+                                            <div th:text="${'#' + session.invoice.invoiceID}">Invoice - #009</div>
+                                            <div th:text="${session.invoice.orderDate}">January 10th 2020</div>
                                         </div>
                                     </div>
                                 </div>
@@ -251,10 +251,10 @@
                                                 </td>
                                                 <td>
                                                     <p>
-                                                        <span th:text="${'$' + invoice.subTotal}">$5000.00</span><br>
-                                                        <span th:text="${'$' + invoice.subTotal}">$5000.00</span><br>
+                                                        <span th:text="${'$' + session.invoice.subTotal}">$5000.00</span><br>
+                                                        <span th:text="${'$' + session.invoice.subTotal}">$5000.00</span><br>
                                                     </p>
-                                                    <h5 class="text-success" th:text="${'$' + invoice.total}"><strong>$5150.99</strong></h5>
+                                                    <h5 class="text-success" th:text="${'$' + session.invoice.total}"><strong>$5150.99</strong></h5>
                                                 </td>
                                             </tr>
                                             </tbody>

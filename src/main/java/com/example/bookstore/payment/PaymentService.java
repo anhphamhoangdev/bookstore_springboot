@@ -3,12 +3,15 @@ package com.example.bookstore.payment;
 import com.example.bookstore.service.InvoiceService;
 import com.example.bookstore.service.StockService;
 import com.example.bookstore.util.GenerateID;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-@Component
+import java.io.UnsupportedEncodingException;
+
+@Service
 public class PaymentService {
     private PaymentStrategy paymentStrategy;
 
@@ -29,11 +32,14 @@ public class PaymentService {
                                String address,
                                String paymentMethod,
                                Double subTotal,
-                               Double total) {
+                               Double total, HttpServletRequest request) throws UnsupportedEncodingException {
         if(paymentMethod.equals("cash-on-delivery")) {
             paymentStrategy = new CODPayment();
         }
-        paymentStrategy.pay(generateID, invoiceService, session, stockService,model, firstName, address, paymentMethod, subTotal, total);
+        if(paymentMethod.equals("vnpay")) {
+            paymentStrategy = new VNPayPayment();
+        }
+        paymentStrategy.pay(generateID, invoiceService, session, stockService,model, firstName, address, paymentMethod, subTotal, total, request);
     }
 
 }

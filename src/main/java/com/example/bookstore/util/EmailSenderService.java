@@ -10,7 +10,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class EmailSenderService {
         }
     }
 
-    public String createHtmlEmail(HttpSession session, String firstName, String lastName) throws IOException
+    public String createBillHtmlEmail(HttpSession session, String firstName, String lastName) throws IOException
     {
         Invoice invoice = (Invoice) session.getAttribute("invoice");
         String content = "<html><body><h3>Hi, "+firstName+" ! </h3><br>";

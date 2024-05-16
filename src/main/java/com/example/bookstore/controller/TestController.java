@@ -28,7 +28,10 @@ public class TestController {
 
 
 
-
+    @RequestMapping("/bill")
+    public String bill(){
+        return "invoice";
+    }
 
 
 

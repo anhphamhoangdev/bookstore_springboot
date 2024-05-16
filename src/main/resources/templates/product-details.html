@@ -320,7 +320,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <script>
+        function submitLogOutForm() {
+            // Lấy tham chiếu đến biểu mẫu
+            var form = document.getElementById('logout');
 
+            // Gửi biểu mẫu
+            form.submit();
+        }
+    </script>
 </body>
 
 </html>

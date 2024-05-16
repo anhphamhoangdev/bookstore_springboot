@@ -7,4 +7,6 @@ public interface UserService extends UserDetailsService {
     public void save(User user);
     public User findByUsername(String username);
     public User findByEmail(String email);
+
+    public void merge(User user);
 }

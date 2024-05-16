@@ -3,8 +3,11 @@ package com.example.bookstore.payment;
 import com.example.bookstore.service.InvoiceService;
 import com.example.bookstore.service.StockService;
 import com.example.bookstore.util.GenerateID;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
+
+import java.io.UnsupportedEncodingException;
 
 public interface PaymentStrategy {
     public void pay(GenerateID generateID,
@@ -16,6 +19,6 @@ public interface PaymentStrategy {
                     String address,
                     String paymentMethod,
                     Double subTotal,
-                    Double total);
+                    Double total, HttpServletRequest request) throws UnsupportedEncodingException;
 }
 
