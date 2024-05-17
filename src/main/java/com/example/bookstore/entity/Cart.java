@@ -18,6 +18,7 @@ public class Cart
             inverseJoinColumns = @JoinColumn(name = "line_item_id"))
     private List<LineItem> lineItemList ;
 
+    private int discount;
 
     public Cart() {
     }
@@ -53,6 +54,14 @@ public class Cart
         if(lineItemList.contains(lineItem)) lineItemList.remove(lineItem);
     }
 
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
     public Double subTotal() {
         double subtotal = 0;
         for(LineItem lineItem : this.lineItemList)
@@ -64,7 +73,16 @@ public class Cart
 
     public Double total() {
         double subtotal = subTotal();
-        double total = subtotal - (subtotal*0);
+        double total;
+        double discountPercentage = (double) discount / 100.0;
+        if(subtotal > 100)
+        {
+            total = subtotal - (subtotal*discountPercentage);
+        }
+        else
+        {
+            total = subtotal + 10 - (subtotal*discountPercentage);
+        }
         return total;
     }
 }

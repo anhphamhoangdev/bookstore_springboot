@@ -6,6 +6,7 @@ import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.CategoryRepository;
 import com.example.bookstore.repository.PublisherRepository;
 import com.example.bookstore.service.BookService;
+import com.example.bookstore.service.DiscountService;
 import com.example.bookstore.service.UserService;
 import com.example.bookstore.util.EmailSenderService;
 import com.example.bookstore.util.GenerateID;
@@ -26,14 +27,15 @@ public class BookstoreApplication {
         SpringApplication.run(BookstoreApplication.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner commandLineRunner(EmailSenderService emailSenderService)
-//    {
-//        return runner -> {
-//
-//            emailSenderService.sendSimpleMail("danghieuanh0401@gmail.com","HELLO","OK");
-//
-//        };
-//    }
+    @Bean
+    public CommandLineRunner commandLineRunner(EmailSenderService emailSenderService, DiscountService discountService)
+    {
+        return runner -> {
+            Discount discount = new Discount();
+            discount.setDiscountAmount(10);
+            discount.setDiscountCode(discountService.createDiscountCode());
+            discountService.save(discount);
+        };
+    }
 
 }

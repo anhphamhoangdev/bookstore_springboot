@@ -30,9 +30,19 @@ public class VNPayPayment implements PaymentStrategy{
         invoice.setDeliveryDate(d);
 
         invoice.setSubTotal(subTotal);
+        if(invoice.getSubTotal() > 100)
+        {
+            invoice.setShippingFee(0.0);
+        }
+        else
+        {
+            double shippingFee = 10.0;
+            invoice.setShippingFee(shippingFee);
+            total = subTotal+shippingFee;
+        }
         invoice.setTotal(total);
-
         Cart cart = (Cart) session.getAttribute("cart");
+        invoice.setDiscount(cart.getDiscount());
         for (int i = cart.getLineItemList().size() - 1; i >= 0; i--) {
             LineItem l = cart.getLineItemList().get(i);
             invoice.addLineItem(l);

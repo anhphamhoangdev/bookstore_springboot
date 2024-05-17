@@ -156,8 +156,7 @@
                                 <div class="col-12 mb-3">
                                     <label>
                                         <input type="radio" name="payment-method" value="vnpay">
-                                        <img th:src="@{/img/core-img/vnpay.png}">
-                                        VNPay
+                                        <img th:src="@{/img/core-img/vnpay.png}" style="width: 15%">
                                     </label>
                                 </div>
 
@@ -169,10 +168,15 @@
                     <div class="cart-summary">
                         <h5>Order Summary</h5>
                         <ul class="summary-table">
-                            <li><span>subtotal:</span> <span th:text="${session.cart.subTotal()}">$140.00</span></li>
-                            <li><span>delivery:</span> <span>Free</span></li>
-                            <li><span>discount:</span> <span>Free</span></li>
-                            <li><span>total:</span> <span th:text="${session.cart.total()}">$140.00</span></li>
+                            <li><span>subtotal:</span> <span th:text="${'$' + session.cart.subTotal()}">$140.00</span></li>
+                            <li th:if="${session.cart.subTotal() > 100}">
+                                <span>delivery:</span> <span>Free</span>
+                            </li>
+                            <li th:unless="${session.cart.subTotal() > 100}">
+                                <span>delivery:</span> <span>$10</span>
+                            </li>
+                            <li><span>discount:</span> <span th:text="${session.cart.discount+'%'}">Free</span></li>
+                            <li><span>total:</span> <span th:text="${'$' + session.cart.total()}">$140.00</span></li>
                         </ul>
                         <div class="cart-btn mb-15">
                             <a onclick="submitForm()" class="btn amado-btn w-100">Confirm</a>

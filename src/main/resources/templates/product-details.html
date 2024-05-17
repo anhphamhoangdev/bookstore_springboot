@@ -221,8 +221,9 @@
                                 </div>
                                 <button type="submit" class="btn amado-btn">Add to cart</button>
                             </form>
-                            <form class="cart clearfix" method="post" th:if="${stock.getQuantity() <= 0}">
-                                <button type="submit" name="addtofavorite" class="btn amado-btn">Add to favorite</button>
+                            <form th:action="@{/favorite/add-to-favorite}" class="cart clearfix" method="get" th:if="${stock.getQuantity() <= 0}">
+                                <input type="hidden" name="id" th:value="${stock.getBook().getBookID()}">
+                                <button type="submit" class="btn amado-btn">Add to favorite</button>
                             </form>
                         </div>
                     </div>

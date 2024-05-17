@@ -238,7 +238,7 @@
                                                 </td>
                                                 <td th:text="${'#'+lineitem.getBook().getBookID()}">#50000981</td>
                                                 <td th:text="${lineitem.getQuantity()}">9</td>
-                                                <td th:text="${lineitem.getQuantity() * lineitem.getBook().sellPrice}">$5000.00</td>
+                                                <td th:text="${'$' + lineitem.getQuantity() * lineitem.getBook().sellPrice}">$5000.00</td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
@@ -246,15 +246,17 @@
                                                     <p>
                                                         Subtotal<br>
                                                         Shipping &amp; Handling<br>
+                                                        Discount<br>
                                                     </p>
                                                     <h5 class="text-success"><strong>Grand Total</strong></h5>
                                                 </td>
                                                 <td>
                                                     <p>
-                                                        <span th:text="${'$' + session.invoice.subTotal}">$5000.00</span><br>
-                                                        <span th:text="${'$' + session.invoice.subTotal}">$5000.00</span><br>
+                                                        <span th:text="${'$ ' + session.invoice.subTotal}">$5000.00</span><br>
+                                                        <span th:text="${'$ ' + session.invoice.shippingFee}">$5000.00</span><br>
+                                                        <span th:text="${session.invoice.discount + '%'}"></span>
                                                     </p>
-                                                    <h5 class="text-success" th:text="${'$' + session.invoice.total}"><strong>$5150.99</strong></h5>
+                                                    <h5 class="text-success" th:text="${'$ ' + session.invoice.total}"><strong>$5150.99</strong></h5>
                                                 </td>
                                             </tr>
                                             </tbody>

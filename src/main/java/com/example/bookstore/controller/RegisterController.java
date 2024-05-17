@@ -1,14 +1,9 @@
 package com.example.bookstore.controller;
 
 
-import com.example.bookstore.entity.Cart;
-import com.example.bookstore.entity.Favorite;
-import com.example.bookstore.entity.Role;
-import com.example.bookstore.entity.User;
-import com.example.bookstore.service.CartService;
-import com.example.bookstore.service.FavoriteService;
-import com.example.bookstore.service.RoleService;
-import com.example.bookstore.service.UserService;
+import com.example.bookstore.entity.*;
+import com.example.bookstore.service.*;
+import com.example.bookstore.util.EmailSenderService;
 import com.example.bookstore.util.GenerateID;
 import com.example.bookstore.web.RegisterUser;
 import jakarta.servlet.http.HttpSession;
@@ -22,22 +17,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
+
 @Controller
 public class RegisterController {
 
+    private final EmailSenderService emailSenderService;
     private UserService userService;
     private RoleService roleService;
     private FavoriteService favoriteService;
     private CartService cartService;
     private GenerateID generateID;
+    private DiscountService discountService;
 
     @Autowired
-    public RegisterController(UserService userService, GenerateID generateID, RoleService roleService, FavoriteService favoriteService, CartService cartService) {
+    public RegisterController(UserService userService, GenerateID generateID, RoleService roleService, FavoriteService favoriteService, CartService cartService, DiscountService discountService, EmailSenderService emailSenderService) {
         this.userService = userService;
         this.generateID = generateID;
         this.roleService = roleService;
         this.favoriteService = favoriteService;
         this.cartService = cartService;
+        this.discountService = discountService;
+        this.emailSenderService = emailSenderService;
     }
 
     @RequestMapping("/signup")
@@ -51,8 +52,7 @@ public class RegisterController {
     public String processSignup(@Valid @ModelAttribute RegisterUser registerUser,
                                 BindingResult bindingResult,
                                 Model model,
-                                HttpSession session)
-    {
+                                HttpSession session) throws IOException {
         // form validation
         if(bindingResult.hasErrors())
         {
@@ -95,6 +95,11 @@ public class RegisterController {
         Role role = roleService.findByName("ROLE_USER");
         user.addRoles(role);
 
+        Discount discount = discountService.findAll().get(0);
+        String emailSubject = "Thank You For Becoming Our Customer, "+user.getFirstName()+" !";
+        String htmlDiscount = emailSenderService.createDiscountHtmlEmail(discount);
+        emailSenderService.sendHtmlMail(user.getEmail(), emailSubject, htmlDiscount);
+        user.addDiscount(discount);
         // create cart + favorite
         Favorite favorite = new Favorite();
         favorite.setUserID(user.getUserID());

@@ -34,6 +34,10 @@ public class Invoice {
     @Column(name = "sub_total")
     private double subTotal;
 
+    @Column(name = "shipping_fee")
+    private Double shippingFee;
+
+
     @Column(name = "total")
     private double total;
 
@@ -147,6 +151,18 @@ public class Invoice {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    public Double getShippingFee() {
+        return shippingFee;
+    }
+
+    public void setShippingFee(Double shippingFee) {
+        this.shippingFee = shippingFee;
     }
 
     public void addLineItem(LineItem lineItem)

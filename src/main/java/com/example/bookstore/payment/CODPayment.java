@@ -36,9 +36,19 @@ public class CODPayment implements PaymentStrategy{
         invoice.setDeliveryDate(d);
 
         invoice.setSubTotal(subTotal);
+        // subtotal > $100 => free, else $10
+        if(invoice.getSubTotal() > 100)
+        {
+            invoice.setShippingFee(0.0);
+        }
+        else
+        {
+            double shippingFee = 10.0;
+            invoice.setShippingFee(shippingFee);
+        }
         invoice.setTotal(total);
-
         Cart cart = (Cart) session.getAttribute("cart");
+        invoice.setDiscount(cart.getDiscount());
         for (int i = cart.getLineItemList().size() - 1; i >= 0; i--) {
             LineItem l = cart.getLineItemList().get(i);
             invoice.addLineItem(l);

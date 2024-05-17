@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,7 +49,7 @@ public class FavoriteController {
         return "favorite";
     }
 
-    @RequestMapping("/add-to-favorite")
+    @GetMapping("/add-to-favorite")
     public String addToFavorite(@RequestParam("id") String id, HttpSession session){
         User user = (User) session.getAttribute("user");
         Favorite favorite = favoriteService.findByUserId(user.getUserID());
@@ -58,8 +59,12 @@ public class FavoriteController {
             session.setAttribute("error", "BOOK NOT FOUND...");
             throw new EntityNotFoundException("Book not found");
         }
-        favorite.addBook(book);
-        favoriteService.merge(favorite);
+        if(!favorite.getBook().contains(book))
+        {
+            favorite.addBook(book);
+            favoriteService.merge(favorite);
+
+        }
         session.setAttribute("favorite", favorite);
         return "favorite";
     }

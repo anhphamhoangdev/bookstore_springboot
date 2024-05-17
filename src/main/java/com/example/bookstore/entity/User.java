@@ -53,6 +53,13 @@ public class User {
     @OneToMany()
     private List<Invoice> invoices;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.REFRESH
+            })
+    private List<Discount> discounts;
+
     // constructor
     public User() {
     }
@@ -176,6 +183,22 @@ public class User {
         this.invoices = invoice;
     }
 
+    public List<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(List<Discount> discounts) {
+        this.discounts = discounts;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
     public void addRoles(Role role)
     {
         if(roles == null) roles = new ArrayList<>();
@@ -186,5 +209,11 @@ public class User {
     {
         if(invoices == null) invoices = new ArrayList<>();
         invoices.add(invoice);
+    }
+
+    public void addDiscount(Discount discount)
+    {
+        if(discounts == null) discounts = new ArrayList<>();
+        discounts.add(discount);
     }
 }

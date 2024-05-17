@@ -2,6 +2,7 @@ package com.example.bookstore.controller;
 
 import com.example.bookstore.entity.Cart;
 import com.example.bookstore.payment.PaymentService;
+import com.example.bookstore.service.CartService;
 import com.example.bookstore.util.EmailSenderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,12 +23,14 @@ public class CheckoutController {
     private final EmailSenderService emailSenderService;
     private final SpringTemplateEngine templateEngine;
     private PaymentService paymentService;
+    private CartService cartService;
 
     @Autowired
-    public CheckoutController(PaymentService paymentService, EmailSenderService emailSenderService, SpringTemplateEngine templateEngine) {
+    public CheckoutController(PaymentService paymentService, EmailSenderService emailSenderService, SpringTemplateEngine templateEngine, CartService cartService) {
         this.paymentService = paymentService;
         this.emailSenderService = emailSenderService;
         this.templateEngine = templateEngine;
+        this.cartService = cartService;
     }
 
     @RequestMapping("")
@@ -54,8 +57,10 @@ public class CheckoutController {
             String paymentUrl = session.getAttribute("paymentUrl").toString();
             url = "redirect:" + paymentUrl;
         }
+        cart.setDiscount(0);
+        cartService.merge(cart);
         String emailSubject = "Thank You For Supporting, "+firstName+" "+lastName;
-        String htmlInvoice = emailSenderService.createBillHtmlEmail(session, firstName, lastName);
+        String htmlInvoice = emailSenderService.createBillHtmlEmail(session, firstName);
         emailSenderService.sendHtmlMail(email, emailSubject, htmlInvoice);
         return url;
     }

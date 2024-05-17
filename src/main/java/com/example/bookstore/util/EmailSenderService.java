@@ -1,5 +1,6 @@
 package com.example.bookstore.util;
 
+import com.example.bookstore.entity.Discount;
 import com.example.bookstore.entity.Invoice;
 import com.example.bookstore.entity.LineItem;
 import jakarta.mail.MessagingException;
@@ -47,7 +48,7 @@ public class EmailSenderService {
         }
     }
 
-    public String createBillHtmlEmail(HttpSession session, String firstName, String lastName) throws IOException
+    public String createBillHtmlEmail(HttpSession session, String firstName) throws IOException
     {
         Invoice invoice = (Invoice) session.getAttribute("invoice");
         String content = "<html><body><h3>Hi, "+firstName+" ! </h3><br>";
@@ -66,11 +67,23 @@ public class EmailSenderService {
             content += lineItemRow;
         }
         content += "</table><br>";
-        content += "<span>Sub Total :</span> " + invoice.getSubTotal() + "<br>";
-        content += "<span>Discount :</span> " + 0 + "%<br>";
-        content += "<span>Total :</span><strong> " + invoice.getTotal()+"</strong>";
+        content += "<span>Sub Total :</span> $" + invoice.getSubTotal() + "<br>";
+        content += "<span>Discount :</span> " + invoice.getDiscount() + "%<br>";
+        content += "<span>Shipping :</span> $" + invoice.getShippingFee() + "<br>";
+        content += "<span>Total :</span><strong> $" + invoice.getTotal()+"</strong>";
         content += "</body></html>";
         String emailContent = content;
         return emailContent;
     }
+
+    public String createDiscountHtmlEmail(Discount discount) throws IOException
+    {
+        String content = "<h3><strong><span>***</span> We've got a special" + discount.getDiscountAmount() + "% discount just for you <span>***</span></strong></h3><br>" +
+                "YOUR DISCOUNT CODE: <div style=\"border: 1px solid black; padding: 5px; display: inline-block;\"><strong>" + discount.getDiscountCode() + "</strong></div>\n" +
+                "<h3><strong>YOU CAN USE THIS COUPON ONE TIME</strong></h3><br>";
+        String emailContent = content;
+        return emailContent;
+    }
+
+
 }
