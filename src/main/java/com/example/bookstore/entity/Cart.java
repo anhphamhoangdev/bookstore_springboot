@@ -73,6 +73,7 @@ public class Cart
 
     public Double total() {
         double subtotal = subTotal();
+        if(subtotal == 0) return subtotal;
         double total;
         double discountPercentage = (double) discount / 100.0;
         if(subtotal > 100)

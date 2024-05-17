@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class EmailSenderService {
@@ -84,6 +85,30 @@ public class EmailSenderService {
         String emailContent = content;
         return emailContent;
     }
+
+    public String createForgotPasswordEmail(String new_password)
+    {
+        String content = "<h3><strong><span>***</span> PLEASE DO NOT SHARE WITH ANYONE <span>***</span></strong></h3><br>" +
+                "YOUR NEW PASSWORD: <div style=\"border: 1px solid black; padding: 5px; display: inline-block;\"><strong>" + new_password + "</strong></div>\n" +
+                "<h3><strong>YOU CAN CHANGE THIS PASSWORD IN YOUR ACCOUNT INFORMATION</strong></h3><br>";
+        String emailContent = content;
+        return emailContent;
+    }
+
+    public String generateRandom() {
+        String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(10);
+
+        for (int i = 0; i < 10; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            char randomChar = characters.charAt(randomIndex);
+            sb.append(randomChar);
+        }
+        return sb.toString();
+    }
+
+
 
 
 }

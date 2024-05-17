@@ -76,8 +76,13 @@
                         Hello, <span th:text="${session.user.firstName + '!'}"></span>
                     </li>
                     <li th:if="${session.user != null}">
+                        <form method="post" th:action="@{/account}" id="account">
+                            <input type="hidden" name="userID" th:value="${session.user.getUserID()}">
+                            <a onclick="submitAccountForm()" class="login__button">Account</a>
+                        </form>
+                    <li th:if="${session.user != null}">
                         <form method="post" th:action="@{/logout}" id="logout">
-                            <a onclick="submitForm()" class="login__button">Log Out</a>
+                            <a onclick="submitLogOutForm()" class="login__button">Log Out</a>
                         </form>
 
                     </li>
@@ -322,6 +327,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="js/active.js"></script>
     <script>
+
+        function submitAccountForm() {
+            // Lấy tham chiếu đến biểu mẫu
+            var form = document.getElementById('account');
+
+            // Gửi biểu mẫu
+            form.submit();
+        }
         function submitLogOutForm() {
             // Lấy tham chiếu đến biểu mẫu
             var form = document.getElementById('logout');

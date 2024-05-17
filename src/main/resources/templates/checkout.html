@@ -74,8 +74,13 @@
                     Hello, <span th:text="${session.user.firstName + '!'}"></span>
                 </li>
                 <li th:if="${session.user != null}">
+                    <form method="post" th:action="@{/account}" id="account">
+                        <input type="hidden" name="userID" th:value="${session.user.getUserID()}">
+                        <a onclick="submitAccountForm()" class="login__button">Account</a>
+                    </form>
+                <li th:if="${session.user != null}">
                     <form method="post" th:action="@{/logout}" id="logout">
-                        <a onclick="submitForm()" class="login__button">Log Out</a>
+                        <a onclick="submitLogOutForm()" class="login__button">Log Out</a>
                     </form>
 
                 </li>
@@ -83,7 +88,7 @@
                     <a th:href="@{/login}">Login</a>
                 </li>
                 <li><a th:href="@{/}">Shop</a></li>
-                <li class="active"><a th:href="@{/cart}">Cart<span th:if="${session.user != null}" th:text=" ' ('+${session.cart.getLineItemList().size()}+') ' "> (0) </span></a></li>
+                <li><a th:href="@{/cart}">Cart<span th:if="${session.user != null}" th:text=" ' ('+${session.cart.getLineItemList().size()}+') ' "> (0) </span></a></li>
                 <li><a th:href="@{/favorite}">Favorite</a></li>
             </ul>
         </nav>
@@ -290,6 +295,20 @@
             // Nếu form không hợp lệ, hiển thị thông báo lỗi
             alert('Please fill in all required fields.');
         }
+    }
+    function submitAccountForm() {
+        // Lấy tham chiếu đến biểu mẫu
+        var form = document.getElementById('account');
+
+        // Gửi biểu mẫu
+        form.submit();
+    }
+    function submitLogOutForm() {
+        // Lấy tham chiếu đến biểu mẫu
+        var form = document.getElementById('logout');
+
+        // Gửi biểu mẫu
+        form.submit();
     }
 </script>
 

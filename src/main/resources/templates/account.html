@@ -22,7 +22,7 @@
     <title>BOOKSTORE | Account</title>
 
     <!-- Favicon  -->
-    <link th:rel="icon" th:href="@{../img/core-img/favicon.ico}">
+    <link th:rel="icon" th:href="@{/img/core-img/favicon.ico}">
 
     <!-- Core Style CSS -->
     <link th:rel="stylesheet" th:href="@{/css/core-style.css}">
@@ -231,4 +231,20 @@
 <!-- HTML !-->
 
 </body>
+<script>
+    function submitAccountForm() {
+        // Lấy tham chiếu đến biểu mẫu
+        var form = document.getElementById('account');
+
+        // Gửi biểu mẫu
+        form.submit();
+    }
+    function submitLogOutForm() {
+        // Lấy tham chiếu đến biểu mẫu
+        var form = document.getElementById('logout');
+
+        // Gửi biểu mẫu
+        form.submit();
+    }
+</script>
 </html>

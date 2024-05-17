@@ -74,8 +74,13 @@
                     Hello, <span th:text="${session.user.firstName + '!'}"></span>
                 </li>
                 <li th:if="${session.user != null}">
+                    <form method="post" th:action="@{/account}" id="account">
+                        <input type="hidden" name="userID" th:value="${session.user.getUserID()}">
+                        <a onclick="submitAccountForm()" class="login__button">Account</a>
+                    </form>
+                <li th:if="${session.user != null}">
                     <form method="post" th:action="@{/logout}" id="logout">
-                        <a onclick="submitForm()" class="login__button">Log Out</a>
+                        <a onclick="submitLogOutForm()" class="login__button">Log Out</a>
                     </form>
 
                 </li>
@@ -176,10 +181,10 @@
                             <li><span>discount:</span> <span th:text="${session.cart.discount+'%'}">20%</span></li>
                             <li><span>total:</span> <span th:text="${'$' + session.cart.total()}">$140.00</span></li>
                         </ul>
-                        <div class="cart-btn mb-15">
+                        <div class="cart-btn mb-15" th:if="${session.cart.getLineItemList().size() > 0}">
                             <a th:href="@{/checkout}" class="btn amado-btn w-100">Checkout</a>
                         </div>
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3" th:if="${session.cart.getLineItemList().size() > 0}">
                             <input type="text" class="form-control" placeholder="Coupon code" id="coupon-code" aria-label="Recipient's username" aria-describedby="basic-addon2">                            <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" onclick="submitForm()">Submit</button>
                             </div>
@@ -296,6 +301,21 @@
         form.appendChild(hiddenField);
 
         document.body.appendChild(form);
+        form.submit();
+    }
+
+    function submitAccountForm() {
+        // Lấy tham chiếu đến biểu mẫu
+        var form = document.getElementById('account');
+
+        // Gửi biểu mẫu
+        form.submit();
+    }
+    function submitLogOutForm() {
+        // Lấy tham chiếu đến biểu mẫu
+        var form = document.getElementById('logout');
+
+        // Gửi biểu mẫu
         form.submit();
     }
 </script>

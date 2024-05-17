@@ -62,7 +62,7 @@
             <img src="assets/img/Untitled.svg" alt="">
         </div>
 
-        <div class="login__forms" style="margin-top: 70px">
+        <div class="login__forms">
             <form action="#" th:action="@{/authenticateTheUser}" class="login__registre" id="login-in" method="post">
 
 
@@ -81,13 +81,8 @@
                 </div>
 
                 <a onclick="submitForm()" class="login__button" id="signin-button">Sign In</a>
-                <a class="login__signin" style="font-size: 15px" href="#">Forgot password?</a><br><br>
-                or sign in with
-                <div class="login__social">
-                    <a href="#" class="login__social-icon"><i class='bx bxl-facebook' ></i></a>
-                    <a href="#" class="login__social-icon"><i class='bx bxl-twitter' ></i></a>
-                    <a href="#" class="login__social-icon"><i class='bx bxl-google' ></i></a>
-                </div>
+                <a class="login__signin" style="font-size: 15px" th:href="@{/forgot-password}">Forgot password?</a><br><br>
+
                 <div>
                     <span class="login__account">Don't have an Account ?</span>
                     <a th:href="@{/signup}" class="login__signin" id="sign-up">Sign Up</a>
