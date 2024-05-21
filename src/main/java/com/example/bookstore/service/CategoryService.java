@@ -8,4 +8,6 @@ public interface CategoryService {
     public List<Category> findALl();
 
     public Category getCategoryById(String id);
+
+    public Category save(Category category);
 }

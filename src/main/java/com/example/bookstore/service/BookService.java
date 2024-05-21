@@ -14,4 +14,6 @@ public interface BookService {
     public List<Book> findBookByName(String name);
 
     public List<Book> findBookByPrice(double min, double max);
+
+    public void merge(Book book);
 }

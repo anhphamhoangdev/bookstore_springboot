@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,6 +48,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void merge(User user) {
         userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User findById(String id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override

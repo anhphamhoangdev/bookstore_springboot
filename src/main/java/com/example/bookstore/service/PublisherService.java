@@ -8,4 +8,6 @@ public interface PublisherService {
     public List<Publisher> findAll();
 
     public Publisher getPublisherById(String id);
+
+    public Publisher save(Publisher publisher);
 }

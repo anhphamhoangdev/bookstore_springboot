@@ -44,5 +44,10 @@ public class BookServiceImpl implements BookService{
         return bookRepository.findBySellPriceBetween(min, max);
     }
 
+    @Override
+    public void merge(Book book) {
+        bookRepository.saveAndFlush(book);
+    }
+
 
 }
