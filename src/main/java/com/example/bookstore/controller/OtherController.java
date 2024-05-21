@@ -1,6 +1,5 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.entity.User;
 import com.example.bookstore.service.InvoiceService;
 import jakarta.servlet.http.HttpSession;
 
@@ -9,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TestController {
+public class OtherController {
 
     private InvoiceService invoiceService;
 
     @Autowired
-    public TestController(InvoiceService invoiceService) {
+    public OtherController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }
 

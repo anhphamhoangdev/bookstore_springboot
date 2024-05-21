@@ -27,15 +27,16 @@ public class BookstoreApplication {
         SpringApplication.run(BookstoreApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(EmailSenderService emailSenderService, DiscountService discountService)
-    {
-        return runner -> {
-            Discount discount = new Discount();
-            discount.setDiscountAmount(10);
-            discount.setDiscountCode(discountService.createDiscountCode());
-            discountService.save(discount);
-        };
-    }
+    // JUST USE TO TEST MY DISCOUNT
+//    @Bean
+//    public CommandLineRunner commandLineRunner(EmailSenderService emailSenderService, DiscountService discountService)
+//    {
+//        return runner -> {
+//            Discount discount = new Discount();
+//            discount.setDiscountAmount(10);
+//            discount.setDiscountCode(discountService.createDiscountCode());
+//            discountService.save(discount);
+//        };
+//    }
 
 }
