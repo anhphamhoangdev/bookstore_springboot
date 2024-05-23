@@ -1,4 +1,4 @@
-# Online Bookstore - VN
+# Online Bookstore 
 **UPDATE SOON....**
 ## Project Description
 ## Getting Started
