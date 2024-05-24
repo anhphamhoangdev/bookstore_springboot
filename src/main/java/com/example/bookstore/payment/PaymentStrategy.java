@@ -10,15 +10,18 @@ import org.springframework.ui.Model;
 import java.io.UnsupportedEncodingException;
 
 public interface PaymentStrategy {
-    public void pay(GenerateID generateID,
-                    InvoiceService invoiceService,
-                    HttpSession session,
-                    StockService stockService,
-                    Model model,
-                    String firstName,
-                    String address,
-                    String paymentMethod,
-                    Double subTotal,
-                    Double total, HttpServletRequest request) throws UnsupportedEncodingException;
+    void pay(GenerateID generateID,
+             InvoiceService invoiceService,
+             HttpSession session,
+             StockService stockService,
+             Model model,
+             String firstName,
+             String address,
+             String paymentMethod,
+             Double subTotal,
+             Double total, HttpServletRequest request) throws UnsupportedEncodingException;
 }
+
+
+
 

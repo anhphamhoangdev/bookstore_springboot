@@ -12,3 +12,5 @@ public interface InvoiceRepository extends JpaRepository<Invoice, String> {
     @Query("SELECT SUM(i.total) FROM Invoice i")
     Double calculateTotalSum();
 }
+
+
