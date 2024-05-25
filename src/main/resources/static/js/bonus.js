@@ -2,8 +2,8 @@ $(document).ready(function() {
     $(".slider-range-price").slider({
         range: true,
         min: 1,
-        max: 1000,
-        values: [1, 1000], // Set initial price range
+        max: 50,
+        values: [1, 50], // Set initial price range
         slide: function(event, ui) { // Handle slide event
             var min = ui.values[0];
             var max = ui.values[1];

@@ -11,4 +11,6 @@ public interface AuthorService {
     public Author getAuthorById(String id);
 
     public Author save(Author author);
+
+    void merge(Author author);
 }

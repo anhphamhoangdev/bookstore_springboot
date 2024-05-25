@@ -36,7 +36,7 @@ public class BookstoreApplication {
         SpringApplication.run(BookstoreApplication.class, args);
     }
 
-
+    // COMMENT START
     @Bean
     public CommandLineRunner commandLineRunner(ResourceLoader resourceLoader, BookService bookService, StockService stockService , PublisherService publisherService, CategoryService categoryService , AuthorService authorService , FavoriteService favoriteService, CartService cartService, UserService userService , GenerateID generateID, DiscountService discountService, RoleService roleService)
     {
@@ -108,39 +108,46 @@ public class BookstoreApplication {
 
 
             // ========================== AUTHOR ============================= //
-            Author author = new Author();
-            author.setAuthorID(generateID.generateAuthorId());
-            author.setAuthorName("Kristin Hannah");
-            authorService.save(author);
+            Author author_kristin_hannah = new Author();
+            author_kristin_hannah.setAuthorID(generateID.generateAuthorId());
+            author_kristin_hannah.setAuthorName("Kristin Hannah");
+            authorService.save(author_kristin_hannah);
 
-            Author author2 = new Author();
-            author2.setAuthorID(generateID.generateAuthorId());
-            author2.setAuthorName("Emily Henry");
-            authorService.save(author2);
+            Author author_emily_henry = new Author();
+            author_emily_henry.setAuthorID(generateID.generateAuthorId());
+            author_emily_henry.setAuthorName("Emily Henry");
+            authorService.save(author_emily_henry);
 
-            Author author1 = new Author();
-            author1.setAuthorID(generateID.generateAuthorId());
-            author1.setAuthorName("Freida McFadden");
-            authorService.save(author1);
+            Author author_freida_mcfadden = new Author();
+            author_freida_mcfadden.setAuthorID(generateID.generateAuthorId());
+            author_freida_mcfadden.setAuthorName("Freida McFadden");
+            authorService.save(author_freida_mcfadden);
+
+            Author author_evie_woods = new Author();
+            author_evie_woods.setAuthorID(generateID.generateAuthorId());
+            author_evie_woods.setAuthorName("Evie Woods");
+            authorService.save(author_evie_woods);
+
+
 
 
 
             // ========================== CATEGORY ============================= //
-            Category category = new Category();
-            category.setCategoryID(generateID.generateCategoryId());
-            category.setCategoryName("Novel");
-            categoryService.save(category);
+            Category category_novel = new Category();
+            category_novel.setCategoryID(generateID.generateCategoryId());
+            category_novel.setCategoryName("Novel");
+            categoryService.save(category_novel);
 
 
-            Category category1 = new Category();
-            category1.setCategoryID(generateID.generateCategoryId());
-            category1.setCategoryName("Psychological thriller");
-            categoryService.save(category1);
+            Category category_psychological_thriller = new Category();
+            category_psychological_thriller.setCategoryID(generateID.generateCategoryId());
+            category_psychological_thriller.setCategoryName("Psychological thriller");
+            categoryService.save(category_psychological_thriller);
 
-            Category category2 = new Category();
-            category2.setCategoryID(generateID.generateCategoryId());
-            category2.setCategoryName("Fiction");
-            categoryService.save(category2);
+            Category category_fiction = new Category();
+            category_fiction.setCategoryID(generateID.generateCategoryId());
+            category_fiction.setCategoryName("Fiction");
+            categoryService.save(category_fiction);
 
 
 
@@ -161,6 +168,16 @@ public class BookstoreApplication {
             publisher2.setPublisherName("Berkley");
             publisherService.save(publisher2);
 
+            Publisher publisher_Balaji_Publications = new Publisher();
+            publisher_Balaji_Publications.setPublisherID(generateID.generatePublisherId());
+            publisher_Balaji_Publications.setPublisherName("Balaji Publications");
+            publisherService.save(publisher_Balaji_Publications);
+
+
+            Publisher publisher_One_More_Chapter = new Publisher();
+            publisher_One_More_Chapter.setPublisherID(generateID.generatePublisherId());
+            publisher_One_More_Chapter.setPublisherName("One More Chapter");
+            publisherService.save(publisher_One_More_Chapter);
 
 
             // ========================== BOOKS ============================= //
@@ -180,8 +197,9 @@ public class BookstoreApplication {
             the_women.setBookFrontImage(getImageBlobFromPath("thewomen_front.jpg"));
             the_women.setBookBackImage(getImageBlobFromPath("thewomen_back.jpg"));
             // set author, category, publisher
-            the_women.addAuthor(author);
-            the_women.setCategory(category);
+            author_kristin_hannah.addBook(the_women);
+            the_women.addAuthor(author_kristin_hannah);
+            the_women.setCategory(category_novel);
             the_women.setPublisher(publisher);
             bookService.save(the_women);
             // add book to stock
@@ -211,10 +229,11 @@ public class BookstoreApplication {
             the_housemaid.setBookFrontImage(getImageBlobFromPath("thehousemaid_front.jpg"));
             the_housemaid.setBookBackImage(getImageBlobFromPath("thehousemaid_back.jpg"));
             // set author, category, publisher
-            the_housemaid.addAuthor(author1);
-            the_housemaid.setCategory(category1);
+            the_housemaid.addAuthor(author_freida_mcfadden);
+            the_housemaid.setCategory(category_psychological_thriller);
             the_housemaid.setPublisher(publisher1);
             bookService.save(the_housemaid);
+
             // add book to stock
             Stock the_housemaid_stock = new Stock();
             the_housemaid_stock.setStockID(generateID.generateStockId());
@@ -241,10 +260,11 @@ public class BookstoreApplication {
             funny_story.setBookFrontImage(getImageBlobFromPath("funnystory_front.jpg"));
             funny_story.setBookBackImage(getImageBlobFromPath("funnystory_back.jpeg"));
             // set author, category, publisher
-            funny_story.addAuthor(author2);
-            funny_story.setCategory(category2);
+            funny_story.addAuthor(author_emily_henry);
+            funny_story.setCategory(category_fiction);
             funny_story.setPublisher(publisher2);
             bookService.save(funny_story);
+
             // add book to stock
             Stock funny_story_stock = new Stock();
             funny_story_stock.setStockID(generateID.generateStockId());
@@ -256,8 +276,41 @@ public class BookstoreApplication {
             stockService.save(funny_story_stock);
             bookService.merge(funny_story);
 
+
+            // BOOK 4 : The Lost Bookshop
+            Book lost_bookshop = new Book();
+
+            lost_bookshop.setBookID(generateID.generateBookId());
+            lost_bookshop.setBookName("Lost Bookshop");
+            lost_bookshop.setLanguage("English");
+            lost_bookshop.setPublishYear(new Date(123,6,22));
+            lost_bookshop.setDescription("The most charming and uplifting novel for 2024 and the perfect gift for book lovers!");
+            double lost_bookshop_importPrice = 13.0;
+            lost_bookshop.setSellPrice(lost_bookshop_importPrice * 1.15);
+
+            // set image
+            lost_bookshop.setBookFrontImage(getImageBlobFromPath("lostbookshop_front.jpg"));
+            lost_bookshop.setBookBackImage(getImageBlobFromPath("lostbookshop_back.webp"));
+            // set author, category, publisher
+            lost_bookshop.addAuthor(author_evie_woods);
+            lost_bookshop.setCategory(category_fiction);
+            lost_bookshop.setPublisher(publisher_One_More_Chapter);
+            bookService.save(lost_bookshop);
+
+            // add book to stock
+            Stock lost_bookshop_stock = new Stock();
+            lost_bookshop_stock.setStockID(generateID.generateStockId());
+            lost_bookshop.setStock(lost_bookshop_stock);
+
+            lost_bookshop_stock.setBook(lost_bookshop);
+            lost_bookshop_stock.setQuantity(100);
+            lost_bookshop_stock.setImportPrice(lost_bookshop_importPrice);
+            stockService.save(lost_bookshop_stock);
+            bookService.merge(lost_bookshop);
         };
     }
+
+
 
     public Blob getImageBlobFromPath(String imagePath) {
         try {
@@ -272,5 +325,7 @@ public class BookstoreApplication {
             return null;
         }
     }
+    
+    // COMMENT END
 
 }
