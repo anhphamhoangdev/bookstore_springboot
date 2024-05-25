@@ -102,7 +102,7 @@ public class BookController {
         newBook.setCategory(category);
         newBook.setPublisher(publisher);
         newBook.setDescription(description);
-        newBook.setSellPrice(Double.valueOf(importPrice) * 1.5);
+        newBook.setSellPrice(Double.valueOf(importPrice) * 1.15);
         bookService.save(newBook);
 
         // stock

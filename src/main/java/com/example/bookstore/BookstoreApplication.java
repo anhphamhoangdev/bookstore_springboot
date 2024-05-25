@@ -113,15 +113,15 @@ public class BookstoreApplication {
             author.setAuthorName("Kristin Hannah");
             authorService.save(author);
 
-            Author author1 = new Author();
-            author1.setAuthorID(generateID.generateAuthorId());
-            author1.setAuthorName("Emily Henry");
-            authorService.save(author1);
-
             Author author2 = new Author();
             author2.setAuthorID(generateID.generateAuthorId());
-            author2.setAuthorName("Freida McFadden");
+            author2.setAuthorName("Emily Henry");
             authorService.save(author2);
+
+            Author author1 = new Author();
+            author1.setAuthorID(generateID.generateAuthorId());
+            author1.setAuthorName("Freida McFadden");
+            authorService.save(author1);
 
 
 
@@ -153,7 +153,7 @@ public class BookstoreApplication {
 
             Publisher publisher1 = new Publisher();
             publisher1.setPublisherID(generateID.generatePublisherId());
-            publisher1.setPublisherName("Grand Central Publishing");
+            publisher1.setPublisherName("Bookouture");
             publisherService.save(publisher1);
 
             Publisher publisher2 = new Publisher();
@@ -165,16 +165,16 @@ public class BookstoreApplication {
 
             // ========================== BOOKS ============================= //
 
-            // BOOK 1
+            // BOOK 1 : THE WOMEN : A NOVEL
             Book the_women = new Book();
 
             the_women.setBookID(generateID.generateBookId());
             the_women.setBookName("The Women: A Novel");
             the_women.setLanguage("English");
-            the_women.setPublishYear(new Date(2024,2,6));
+            the_women.setPublishYear(new Date(124,2,6));
             the_women.setDescription("A #1 bestseller on The New York Times, USA Today, Washington Post, and Los Angeles Times!");
             double importPrice = 15.0;
-            the_women.setSellPrice(importPrice * 1.5);
+            the_women.setSellPrice(importPrice * 1.15);
 
             // set image
             the_women.setBookFrontImage(getImageBlobFromPath("thewomen_front.jpg"));
@@ -188,10 +188,73 @@ public class BookstoreApplication {
             Stock stock = new Stock();
             stock.setStockID(generateID.generateStockId());
             the_women.setStock(stock);
+
             stock.setBook(the_women);
             stock.setQuantity(100);
             stock.setImportPrice(importPrice);
             stockService.save(stock);
+            bookService.merge(the_women);
+
+
+            // BOOK 2 : THE HOUSEMAID
+            Book the_housemaid = new Book();
+
+            the_housemaid.setBookID(generateID.generateBookId());
+            the_housemaid.setBookName("The Housemaid");
+            the_housemaid.setLanguage("English");
+            the_housemaid.setPublishYear(new Date(122,4,26));
+            the_housemaid.setDescription("An absolutely addictive psychological thriller with a jaw-dropping twist");
+            double the_housemaid_importPrice = 8.0;
+            the_housemaid.setSellPrice(the_housemaid_importPrice * 1.15);
+
+            // set image
+            the_housemaid.setBookFrontImage(getImageBlobFromPath("thehousemaid_front.jpg"));
+            the_housemaid.setBookBackImage(getImageBlobFromPath("thehousemaid_back.jpg"));
+            // set author, category, publisher
+            the_housemaid.addAuthor(author1);
+            the_housemaid.setCategory(category1);
+            the_housemaid.setPublisher(publisher1);
+            bookService.save(the_housemaid);
+            // add book to stock
+            Stock the_housemaid_stock = new Stock();
+            the_housemaid_stock.setStockID(generateID.generateStockId());
+            the_housemaid.setStock(the_housemaid_stock);
+
+            the_housemaid_stock.setBook(the_housemaid);
+            the_housemaid_stock.setQuantity(100);
+            the_housemaid_stock.setImportPrice(the_housemaid_importPrice);
+            stockService.save(the_housemaid_stock);
+            bookService.merge(the_housemaid);
+
+            // BOOK 3 : FUNNY STORY
+            Book funny_story = new Book();
+
+            funny_story.setBookID(generateID.generateBookId());
+            funny_story.setBookName("Funny Story");
+            funny_story.setLanguage("English");
+            funny_story.setPublishYear(new Date(124,4,23));
+            funny_story.setDescription("A shimmering, joyful new novel about a pair of opposites with the wrong thing in common.");
+            double funny_story_importPrice = 13.0;
+            funny_story.setSellPrice(funny_story_importPrice * 1.15);
+
+            // set image
+            funny_story.setBookFrontImage(getImageBlobFromPath("funnystory_front.jpg"));
+            funny_story.setBookBackImage(getImageBlobFromPath("funnystory_back.jpeg"));
+            // set author, category, publisher
+            funny_story.addAuthor(author2);
+            funny_story.setCategory(category2);
+            funny_story.setPublisher(publisher2);
+            bookService.save(funny_story);
+            // add book to stock
+            Stock funny_story_stock = new Stock();
+            funny_story_stock.setStockID(generateID.generateStockId());
+            funny_story.setStock(funny_story_stock);
+
+            funny_story_stock.setBook(funny_story);
+            funny_story_stock.setQuantity(100);
+            funny_story_stock.setImportPrice(funny_story_importPrice);
+            stockService.save(funny_story_stock);
+            bookService.merge(funny_story);
 
         };
     }
