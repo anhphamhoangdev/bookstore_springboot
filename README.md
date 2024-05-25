@@ -9,7 +9,7 @@
    3. [Build and Run the Application](#subparagraph1)
 4. [Template References](#paragraph2)
 
-## Project Description
+## Project Description <a name="introduction"></a>
 This is an online bookstore that provides users with a convenient online book shopping platform with various useful features. Users can easily search, order, and purchase their favorite books, while administrators can effectively manage product information, customer data, and sales revenue.<br>
 Key features:<br>
 * **User :** Register/login, view book information, search, add to cart/wishlist, checkout, manage personal information, apply discount codes<br>
