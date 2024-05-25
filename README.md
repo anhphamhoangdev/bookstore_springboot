@@ -5,7 +5,15 @@ Key features:<br>
 * **User :** Register/login, view book information, search, add to cart/wishlist, checkout, manage personal information, apply discount codes<br>
 * **Admin :** View sales/profit statistics, manage books/authors/genres/publishers, manage user accounts, manage discount codes<br>
 
-## <span style="color:#FBB711">Technologies Used
+## Table of Contents
+[Headers](#headers)  
+[Emphasis](#emphasis)  
+...snip...    
+
+## Headers
+
+
+## Technologies Used
 ### Front-end Technologies :
 * **Thymeleaf**
 * **HTML5, CSS3, JavaScript** ( [Amado – Free Multipage e-commerce Template](https://themewagon.com/themes/free-html5-e-commerce-template-bootstrap4-amado/) )
@@ -17,19 +25,36 @@ Key features:<br>
 ### Database :
 * **MySQL**
 
-## <span style="color:#FBB711">Getting Started
+## Getting Started
 To run the online bookstore application locally, follow these steps:<br>
 ### Prerequisites
 * Java 11 or higher installed 
-* MySQL database server installed and running 
+* MySQL database server installed and running ( can use PostgreSQL as a replacement )
 * Maven installed
 ### Setup Database
+#### MySQL :
 1. Create a new MySQL database for the bookstore application, e.g., <span style="color:green">**bookstore_db**.
 2. Update the database connection details in the application.properties file located in the src/main/resources directory:
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/bookstore_db
 spring.datasource.username=your-mysql-username
 spring.datasource.password=your-mysql-password
+```
+#### PostgreSQL :
+1. Add the following dependency in pom.xml file to include the PostgreSQL JDBC driver
+```
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.7.3</version>
+</dependency>
+```
+2. Create a new PostgreSQL database for the bookstore application, e.g., **bookstore_db**.
+3. Update the database connection details in the application.properties file located in the src/main/resources directory:
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/bookstore_db
+spring.datasource.username=your-postgresql-username
+spring.datasource.password=your-postgresql-password
 ```
 
 ### Build and Run the Application
