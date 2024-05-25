@@ -1,19 +1,24 @@
 # Online Bookstore 
-## <span style="color:#FBB711">Project Description
+
+## Table of Contents
+1. [Project Description](#introduction)
+2. [Technologies Used](#paragraph1)
+3. [Getting Started](#paragraph2)
+   1. [Prerequisites](#subparagraph1)
+   2. [Setup Database](#subparagraph1)
+   3. [Build and Run the Application](#subparagraph1)
+4. [Template References](#paragraph2)
+
+## Project Description
 This is an online bookstore that provides users with a convenient online book shopping platform with various useful features. Users can easily search, order, and purchase their favorite books, while administrators can effectively manage product information, customer data, and sales revenue.<br>
 Key features:<br>
 * **User :** Register/login, view book information, search, add to cart/wishlist, checkout, manage personal information, apply discount codes<br>
 * **Admin :** View sales/profit statistics, manage books/authors/genres/publishers, manage user accounts, manage discount codes<br>
 
-## Table of Contents
-[Headers](#headers)  
-[Emphasis](#emphasis)  
-...snip...    
-
-## Headers
 
 
-## Technologies Used
+
+## Technologies Used 
 ### Front-end Technologies :
 * **Thymeleaf**
 * **HTML5, CSS3, JavaScript** ( [Amado – Free Multipage e-commerce Template](https://themewagon.com/themes/free-html5-e-commerce-template-bootstrap4-amado/) )
@@ -25,7 +30,7 @@ Key features:<br>
 ### Database :
 * **MySQL**
 
-## Getting Started
+## Getting Started 
 To run the online bookstore application locally, follow these steps:<br>
 ### Prerequisites
 * Java 11 or higher installed 
