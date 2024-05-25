@@ -8,7 +8,7 @@ Key features:<br>
 ## Technologies Used
 ### Front-end Technologies :
 * **Thymeleaf**
-* **HTML5, CSS3, JavaScript**
+* **HTML5, CSS3, JavaScript** ( [Amado – Free Multipage e-commerce Template](https://themewagon.com/themes/free-html5-e-commerce-template-bootstrap4-amado/) )
 * **Bootstrap**
 ### Backend-end Technologies :
 * **Spring Boot**
@@ -69,6 +69,8 @@ public class BookstoreApplication {
 
 #### Remember to comment out the entire "COMMENT START" to "COMMENT END" block in subsequent runs to prevent duplicate data from being added.
 
+### Template References
+- [Amado – Free Multipage e-commerce Template](https://themewagon.com/themes/free-html5-e-commerce-template-bootstrap4-amado/)
 
 
 
