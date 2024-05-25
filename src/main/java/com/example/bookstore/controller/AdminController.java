@@ -88,13 +88,6 @@ public class AdminController {
         return "admin/usertable";
     }
 
-    /*
-    <a class="collapse-item" th:href="@{/admin/add-new-author}">Author</a>
-                    <a class="collapse-item" th:href="@{/admin/add-new-category}">Category</a>
-                    <a class="collapse-item" th:href="@{/admin/add-new-publisher}">Publisher</a>
-                    <a class="collapse-item" th:href="@{/admin/add-new-book}">Book</a>
-                    <a class="collapse-item" th:href="@{/admin/add-new-user}">User</a>
-     */
 
     @GetMapping("/add-new-author")
     public String addAuthor(Model model){

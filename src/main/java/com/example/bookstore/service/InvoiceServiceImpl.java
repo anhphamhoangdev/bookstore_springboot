@@ -24,12 +24,17 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Double getAllSubTotal() {
-        return invoiceRepository.calculateSubtotalSum();
+
+        Double allSubTotal = invoiceRepository.calculateSubtotalSum();
+        if(allSubTotal == null) allSubTotal = 0.0;
+        return allSubTotal;
     }
 
     @Override
     public Double getAllTotal() {
-        return invoiceRepository.calculateTotalSum();
+        Double allTotal = invoiceRepository.calculateTotalSum();
+        if(allTotal == null) allTotal = 0.0;
+        return allTotal;
     }
 
     @Override
